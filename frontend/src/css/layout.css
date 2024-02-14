@@ -1,0 +1,20 @@
+/* used with Layout.js 
+use this file to set the CSS of the TopHeader and BottomFooter components 
+*/
+
+#topheader {
+    border: 5px solid black;
+    height: 150px;
+    position: relative;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+
+#bottomfooter {
+    position: relative;
+    height: 120px;
+    background-color: orange;
+    color: black;
+}

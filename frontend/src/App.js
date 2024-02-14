@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import {BrowserRouter} from "react-router-dom";
+import useStateContext from './hooks/useStateContext.js';
+import {TopHeader,BottomFooter} from './components/Layout.js';
+import WebRoutes from './components/WebRoutes.js';
+
+// the main app component
+// contains the entire website
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const {context,setContext} = useStateContext();
+    const [loggedin, setLoggedin] = useState(context.login_id);
+
+    return (
+        <BrowserRouter>
+            <TopHeader login={loggedin} />
+            <main>
+                <WebRoutes />
+            </main>
+            <BottomFooter />
+        </BrowserRouter>
+    )
 }
 
 export default App;

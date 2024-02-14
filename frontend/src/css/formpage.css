@@ -1,0 +1,74 @@
+/* css for forms */
+
+.form-page {
+    width: 100%;
+    text-align: center;
+    min-height: 55vh;
+}
+
+.form-box {
+    display: inline-block;
+    /* change settings below to fit our website
+    background-color: orange;
+    margin: 5% 5%;
+    padding: 50px 30px;
+    min-width: 400px;
+    max-width: 700px;
+    color: black;
+    border: 1px solid orange;
+    border-radius: 50px; */
+}
+
+.form-inner-box {
+    text-align: left;
+    /* padding: 0 20px; */
+}
+
+.submit-button {
+    /* font-size: 20px;
+    padding: 2px 20px;
+    background-color: goldenrod;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #7A0707;
+    transition: background-color 0.3s, box-shadow 0.3s; */
+}
+
+.submit-button:hover {
+    /* background-color: gold;
+    box-shadow: 3px 3px 3px 1px #7A0707;
+    color: red; */
+}
+
+.other-form-button {
+    text-align: center;
+    text-decoration: none;
+    /* color: black;
+    background-color: goldenrod;
+    padding: 10px 20px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 1px #7A0707;
+    transition: background-color 0.3s, box-shadow 0.3s; */
+}
+
+.other-form-button:hover {
+    /* color: red;
+    background-color: gold;
+    box-shadow: 3px 3px 3px 1px #7A0707; */
+    text-decoration: none;
+}
+
+.logout-button {
+    /* font-size: 25px;
+    padding: 2px 20px;
+    background-color: goldenrod;
+    border: 1px solid black;
+    border-radius: 10px; */
+}
+
+.logout-button:hover {
+    /* color: red;
+    text-decoration: underline red solid; */
+}
