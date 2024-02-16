@@ -12,8 +12,20 @@ use this file to set the CSS of the TopHeader and BottomFooter components
     background-size: cover;
 }
 
+#middleheader{
+    text-align: left;
+    border: 5px solid black;
+    height: 150px;
+    position: left;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+
+}
+
 #bottomfooter {
-    position: relative;
+    position: center;
     height: 120px;
     background-color: orange;
     color: black;
