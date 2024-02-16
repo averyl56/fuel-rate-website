@@ -8,7 +8,8 @@ import SignClear from '../pages/SignClearPage.js';
 import Profile from '../pages/ProfilePage.js';
 import Logout from '../pages/LogoutPage.js';
 
-
+// contains all the page links for the website
+// whenever adding a new page, import the component here and add a Route for it
 function WebRoutes() {
     return (
         <Routes>

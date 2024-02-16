@@ -5,12 +5,13 @@ import useStateContext from '../hooks/useStateContext.js';
 
 //navigation bar at top of screen
 
-//navigation container
+//navigation bar container
 function Navbar(props) {
     const {context, setContext} = useStateContext();
     const [account, setAccount] = useState(context.account);
     
-    // add NavButton for each link in the navbar
+    // have NavButton for each page link in the navbar
+    // maybe set quote history button to only be visible when logged in?
     return (
         <div id='navbox'>
             <ul id='navbar'>
@@ -26,6 +27,7 @@ function Navbar(props) {
 
 //navigation button
 function NavButton(props) {
+    // set whether button floats right or left
     const align = {float: props.align};
     return (
         <li style={align}>
