@@ -14,16 +14,21 @@ const getFreshModel = () => ({
 
 function Signup() {
     const {context, setContext} = useStateContext();
-    const navigate = useNavigate();
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
+    const navigate = useNavigate();
 
     // when form submits, try to create new account
     // include validation and endpoint connection here
     const signup = (e) => {
         e.preventDefault();
+        // connect to backend if form fields are valid
         if (validate()) {
-            // connect to backend if form fields are valid
-            console.log("sign in");
+            /* does nothing for now. will add actual account creation when the
+            backend has been created */
+            
+            // redirect to sign clear page
+            navigate('/signclear');
+            alert("New account created!");
         }
     };
 

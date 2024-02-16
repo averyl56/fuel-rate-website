@@ -21,12 +21,12 @@ function Login() {
     // include validation check and endpoint here
     const login = (e) => {
         e.preventDefault();
+        // connect to backend if user has valid login info
         if (validate()) {
-            // connect to backend if user has valid login info
-
             /* for now it will automatically sign in as long as a username and password is
             provided and will update the state context with the provided username. this is
             temporary until the backend has been set up and we can create endpoints */
+            
             // set state context to the user's username
             setContext({login_id: values.username});
             // redirect to home page
