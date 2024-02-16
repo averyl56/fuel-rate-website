@@ -15,6 +15,7 @@ const getFreshModel = () => ({
 function Login() {
     const {context, setContext} = useStateContext();
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
+    const navigate = useNavigate();
 
     // when form submits, attempt to log in user
     // include validation check and endpoint here
@@ -22,7 +23,16 @@ function Login() {
         e.preventDefault();
         if (validate()) {
             // connect to backend if user has valid login info
-            console.log("log in");
+
+            /* for now it will automatically sign in as long as a username and password is
+            provided and will update the state context with the provided username. this is
+            temporary until the backend has been set up and we can create endpoints */
+            // set state context to the user's username
+            setContext({login_id: values.username});
+            // redirect to home page
+            navigate('/');
+            alert("Successfully logged in!");
+            window.location.reload(false);
         }
     };
 

@@ -49,7 +49,8 @@ function TopHeader(props) {
     return (
         <header>
             <div id='topheader'>
-                <p>Add logo and header image</p>
+                <p>Fuel Tracker</p>
+                {/* <img src="https://cdn.thezebra.com/zfront/media/production/images/8xzyovqA.width-800.jpg" alt="Example" style={{ position: 'relative', top: '50px', left: '50px' }} /> */}
             </div>
             <div style={{height:"60px"}}>
                 <Navbar login={props.login}/>
@@ -63,7 +64,13 @@ function TopHeader(props) {
 function BottomFooter() {
     return (
         <footer id='bottomfooter'>
-            <p>add fake contact info and our names</p>
+            <pre id='footertext' >
+            <span id='footerlogo'>Contact Us</span><br />
+                1800-COSC-4351<br />
+                info@fuel.com
+            </pre>
+            
+        
         </footer>
     );
 }

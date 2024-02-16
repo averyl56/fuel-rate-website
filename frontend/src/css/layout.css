@@ -18,3 +18,30 @@ use this file to set the CSS of the TopHeader and BottomFooter components
     background-color: orange;
     color: black;
 }
+
+/* website logo inside footer */
+#footerlogo {
+    text-align: center ;
+    font-size: 40px;
+    font-family: Lilita One;
+    color: black;
+}
+
+/* textbox inside the footer */
+#footertext {
+    text-align: center;
+    color: black;
+    font: inherit;
+}
+
+#footerimage {
+    position:absolute;
+    background-color:red;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    padding: 15px;
+    height: 180px;
+    width: 270px;
+    float: left;
+}
