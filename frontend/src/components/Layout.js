@@ -49,7 +49,7 @@ function TopHeader(props) {
     return (
         <header>
             <div id='topheader'>
-                <p>Fuel Tracker</p>
+            <p className="top-left width-200">Fuel Tracker</p>
                 {/* <img src="https://cdn.thezebra.com/zfront/media/production/images/8xzyovqA.width-800.jpg" alt="Example" style={{ position: 'relative', top: '50px', left: '50px' }} /> */}
             </div>
             <div style={{height:"60px"}}>
