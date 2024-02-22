@@ -1,6 +1,8 @@
 import React from 'react';
 // you can use this to format the form
 import '../css/formpage.css';
+import useForm from '../hooks/useForm.js';
+import useStateContext from '../hooks/useStateContext.js';
 
 // page that allows a user to calculate fuel rates
 
@@ -14,11 +16,15 @@ const getFreshModel = () => ({
     gallons_req: 0,
     address1: "",
     address2: "",
-    deliveryDate: ""
+    state: "",
+    city: "",
+    zipcode: "",
+    deliveryDate: "",
 });
 
 function FuelRate() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
+    const {context, setContext} = useStateContext();
 
     const submitForm = () => {};
 
