@@ -4,24 +4,34 @@ use this file to set the CSS of the TopHeader and BottomFooter components
 
 #topheader {
     border: 5px solid black;
+    font-family: "Arial";
+    font-size: 55px;
     height: 150px;
-    position: relative;
-    text-align: center;
+    position: center;
+    top: 70%;
+    text-align: left;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
+    padding-top: 30px;
+    margin-left: 20px;
 }
 
-#middleheader{
-    text-align: left;
-    border: 5px solid black;
-    height: 150px;
-    position: left;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-    background-size: cover;
+.highlight {
+    background-color: orange; /* Set background color */
+    border-radius: 10px; /* Add border radius to create oval shape */
+    padding: 2px 5px; /* Add padding to create space around the word */
+}
 
+.black-word {
+    color: black; /* Set color to black */
+}
+
+img {
+    width: 1000px; 
+    height: 100px;
+    margin-left: 50px;
+   
 }
 
 #bottomfooter {

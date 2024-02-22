@@ -2,40 +2,26 @@ import React, {useState,useEffect} from 'react';
 import Navbar from './Navbar.js';
 import '../css/layout.css';
 
-//layout of every page, includes header, navbar, and footer
-
-// header at the top of the page
-// contains the navbar
-// need to add content like our logo and a header image
 function TopHeader(props) {
-    /* we keep track of the user scrolling the page so that whenever the
-    page has been scrolled, the navbar will stay at the top of the screen
-    even when the rest of the header is hidden */
-    
-    // state that says if the page has been scrolled or not
+
     const [scrolled,setScrolled] = useState(false);
 
-    // function determines if the page has been scrolled
     const handleScroll = () => {
         const offset = window.scrollY;
-        // if page has ben scrolled past the height of the topheader (meaning it isnt visible)
-        // set state to scrolled so we know to fix the navbar at the top
+
         if (offset > 150) {
             setScrolled(true);
         } 
-        // set state to false whenever the page has scrolled up so
-        // the header is in view again
+
         else {
             setScrolled(false);
         }
     }
 
-    // adds listener whenever page is loaded that watches for page scrolling
     useEffect(() => {
         window.addEventListener('scroll',handleScroll)
     });
 
-    // when page has been scrolled, we change the state of the navbar
     useEffect(() => {
         const nav = document.getElementById("navbox");
         if (scrolled) {
@@ -49,8 +35,7 @@ function TopHeader(props) {
     return (
         <header>
             <div id='topheader'>
-            {/* <p className="top-left width-200">Fuel Tracker</p> */}
-                {/* <img src="https://cdn.thezebra.com/zfront/media/production/images/8xzyovqA.width-800.jpg" alt="Example" style={{ position: 'relative', top: '50px', left: '50px' }} /> */}
+                <p><strong>Fuel <span className="highlight black-word">Tracker</span></strong><img src="https://investingnews.com/media-library/oil-barrels-on-black-background-with-golden-world-map.jpg?id=33602619&width=1200&height=600&coordinates=0%2C208%2C0%2C209" alt="Image description" /></p>
             </div>
             <div style={{height:"60px"}}>
                 <Navbar login={props.login}/>
@@ -59,18 +44,6 @@ function TopHeader(props) {
     );
 }
 
-function middleHeader() {
-    return (
-        <main>
-        <p className="top-left width-200">TEST</p>
-            {/* <img src="https://cdn.thezebra.com/zfront/media/production/images/8xzyovqA.width-800.jpg" alt="Example" style={{ position: 'relative', top: '50px', left: '50px' }} /> */}
-      
-        </main>
-    );
-}
-
-// footer at the bottom of the page
-// need to add content like fake contact info and our names
 function BottomFooter() {
     return (
         <footer id='bottomfooter'>
@@ -85,4 +58,4 @@ function BottomFooter() {
     );
 }
 
-export {TopHeader,BottomFooter, middleHeader};
+export {TopHeader,BottomFooter};
