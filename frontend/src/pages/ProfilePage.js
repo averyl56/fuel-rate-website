@@ -6,32 +6,42 @@ import '../css/formpage.css';
 
 // the users profile page
 // let them view and change their info
-const getFreshModel = () => ({/*fields*/});
+// set up function when it submits
+const getFreshModel = () => ({
+    name: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zipcode: ""
+});
+
 function Profile() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
-
+    const {context, setContext} = useStateContext();
     const doSomething = () => {};
+    
     return (
         <div className='form-page'>
             <div className='form-box'>
-                <h2>Profile Page</h2>
+                <h2>Profile</h2>
                 <hr style={{border:'2px solid black'}}/>
                 <div className='form-inner-box'>
                     <form name="profileForm" method="post" id="profileForm" onSubmit={doSomething}>
                         <label>Full Name: </label><br />
-                        <input type="text" name="fullName" value={values.username} onChange={handleInputChange} size="50" required/><br />
+                        <input type="text" name="fullName" id="fullName" value={values.username} onChange={handleInputChange} size="50" required/><br />
                         <p>{errors.username}</p><br />
                         <label>Address 1: </label><br />
-                        <input type="address1" name="address1" value={values.address} onChange={handleInputChange} size="100" required/><br />
+                        <input type="text" name="address1" id="address1" value={values.address1} onChange={handleInputChange} size="50" required/><br />
                         <p>{errors.address}</p><br />
                         <label>Address 2: </label><br />
-                        <input type="address2" name="address2" value={values.address} onChange={handleInputChange} size="100"/><br />
+                        <input type="text" name="address2" id="address2" value={values.address2} onChange={handleInputChange} size="50"/><br />
                         <p>{errors.address}</p><br />
                         <label>City: </label><br />
-                        <input type="text" name="city" value={values.city} onChange={handleInputChange} size="100" required/><br />
+                        <input type="text" name="city" id="city" value={values.city} onChange={handleInputChange} size="50" required/><br />
                         <p>{errors.city}</p><br />
-                        <label for = "state"> State: </label>
-                        <select id = "state" name = "state" required>
+                        <label for = "state"> State :  </label><br />
+                        <select id = "state" name = "state" value={values.state} required>
                             <option value = "" disabled selected> Select State </option>
                             <option value = "AL" > Alabama </option>
                             <option value = "AK" > Alaska </option>
@@ -82,13 +92,13 @@ function Profile() {
                             <option value = "WV" > West Virginia </option>
                             <option value = "WI" > Wisconsin </option>
                             <option value = "WY" > Wyoming </option>
-                        </select>
+                        </select> <br /><br />
                         <label>Zipcode: </label><br />
-                        <input type="text" name="zipcode" value={values.zipcode} onChange={handleInputChange} size="9" required/><br />
+                        <input type="text" name="zipcode" id="zipcode" value={values.zipcode} onChange={handleInputChange} size="14" required/><br />
                         <p>{errors.username}</p><br />
                     </form>
                 </div>
-                <button className="submit-button" type="submit" value="Submit" form="profileForm">Sign In</button>
+                <button className="submit-button" type="submit" value="Submit" form="profileForm">Submit</button>
             </div>
         </div>
     )
