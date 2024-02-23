@@ -70,7 +70,9 @@ function FuelRate() {
                         <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readonly></input>
                     </form>
                 </div>
+                <br />
                 <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Submit</button>
+                <br /><br />
                 <p>Suggested Price: {suggestedPrice} </p>
                 <p>Total Amount Due: {totalAmount} </p>
             </div>
