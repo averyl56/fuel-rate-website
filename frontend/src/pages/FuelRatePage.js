@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // you can use this to format the form
 import '../css/formpage.css';
 import useForm from '../hooks/useForm.js';
@@ -25,8 +25,10 @@ const getFreshModel = () => ({
 function FuelRate() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const {context, setContext} = useStateContext();
-
     const submitForm = () => {};
+
+    const [suggestedPrice, setSuggestedPrice] = useState("");
+    const [totalAmount, setTotalAmount] = useState("");
 
     const validate = () => {
         // set error messages in temp object, will display on page if there is an error
@@ -69,8 +71,8 @@ function FuelRate() {
                     </form>
                 </div>
                 <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Submit</button>
-                <p>Suggested Price: </p>
-                <p>Total Amount Due: </p>
+                <p>Suggested Price: {suggestedPrice} </p>
+                <p>Total Amount Due: {totalAmount} </p>
             </div>
         </div>
     );
