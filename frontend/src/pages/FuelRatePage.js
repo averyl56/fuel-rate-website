@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 // you can use this to format the form
 import '../css/formpage.css';
+import useForm from '../hooks/useForm.js';
+import useStateContext from '../hooks/useStateContext.js';
 
 // page that allows a user to calculate fuel rates
 
@@ -10,46 +12,74 @@ import '../css/formpage.css';
 // Suggested Price / gallon (numeric non-editable)
 // Total Amount Due (numeric non-editable, calculated (gallons * price))
 
+const getFreshModel = () => ({
+    gallons_req: 1,
+    address1: "",
+    address2: "",
+    state: "",
+    city: "",
+    zipcode: "",
+    deliveryDate: "",
+});
+
 function FuelRate() {
+    const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
+    const {context, setContext} = useStateContext();
+    const submitForm = () => {};
+
+    const [suggestedPrice, setSuggestedPrice] = useState("");
+    const [totalAmount, setTotalAmount] = useState("");
+
+    const validate = () => {
+        // set error messages in temp object, will display on page if there is an error
+        let temp ={};
+        temp.gallons_req = values.gallons_req > 0 ? "" : "Value must be greater than 0.";
+        const currentDate = new Date();
+        temp.delivery_date = values.delivery_date > currentDate ? "" : "Delivery date must be in the future."
+        setErrors(temp);
+        // checks that all error messages are blank and returns true if so
+        return Object.values(temp).every(x => x == "");
+    };
+
     return (
         <div className='form-page'>
             <div className='form-box'>
                 <h2>Fuel Rate Page</h2>
                 <hr style={{border:'2px solid black'}}/>
                 <div className='form-inner-box'>
-                    <form name="fuelRateForm" method="post" id="fuelRateForm" onSubmit={doSomething}>
+                    <form name="fuelRateForm" method="post" id="fuelRateForm" onSubmit={submitForm}>
                         <label>Gallons Requested: </label><br />
-                        <input type="Gallons Requested" class="form-control" id="gallons_req" name="gallons_req"
-                placeholder="Enter Amount" required></input>
-                        <label>Delivery Address 1</label><br />
-                        <input type="Delivery Address 1" class="form-control" id="address1" name="address1"
-              value="{{user.userInfo.address}}" readonly></input>
-                        <label>Address 2: </label><br />
-                        <input type="Delivery Address2" class="form-control" id="delivery_address2" name="delivery_address2"
-              value="{{user.userInfo.address2}}" readonly></input>
-                        <label>Delivery City: </label><br />
-                        <input type="Delivery City" class="form-control" id="delivery_city" name="delivery_city"
-              value="{{user.userInfo.city}}" readonly></input>
-                        <label>Delivery State:</label>
-                        <input type="Delivery State" class="form-control" id="delivery_state" name="delivery_state"
-              value="{{user.userInfo.state}}" readonly></input>
-                        <label>Delivery Zipcode: </label><br />
-                        <input type="Delivery Zipcode" class="form-control" id="delivery_zipcode" name="delivery_zipcode"
-              value="{{user.userInfo.zipcode}}" readonly></input>
+                        <input type="number" min="1" class="form-control" id="gallons_req" onChange={handleInputChange} name="gallons_req" value={values.gallons_req} required></input>
+                        
                         <label>Delivery Date</label>
-                        <input type="Date" class="form-control" id="delivery_date" name="delivery_date" placeholder="Enter Date" required></input>
-                        <label>Suggested Price</label>
-                        <input type="Suggested Price" class="form-control" id="suggested_price" name="suggested_price"
-              value="{{user.quotes.suggested_price}}" readonly></input>
-                        <label>Total Amount</label>
-                        <input type="Total Amount" class="form-control" id="total_amount" name="total_amount"
-              value="{{user.quotes.total_amount}}" readonly></input>
+                        <input type="date" class="form-control" id="delivery_date" onChange={handleInputChange} name="delivery_date" value={values.delivery_date} required></input>
+                        
+                        <label>Delivery Address 1</label><br />
+                        <input type="text" class="form-control" id="address1" name="address1" value={values.address1} readonly></input>
+
+                        <label>Address 2: </label><br />
+                        <input type="text" class="form-control" id="address2" name="address2" value={values.address2} readonly></input>
+                        
+                        <label>City: </label><br />
+                        <input type="text" class="form-control" id="city" name="city" value={values.city} readonly></input>
+                        
+                        <label>State:</label>
+                        <input type="text" class="form-control" id="state" name="state" value={values.state} readonly></input>
+                        
+                        <label>Zipcode: </label><br />
+                        <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readonly></input>
                     </form>
                 </div>
-                <button className="submit-button" type="submit" value="Submit" form="profileForm">Sign In</button>
+                <br />
+                <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Submit</button>
+                <br /><br />
+                <p>Suggested Price: {suggestedPrice} </p>
+                <p>Total Amount Due: {totalAmount} </p>
             </div>
         </div>
     );
+
+    
 }
 
 export default FuelRate;
