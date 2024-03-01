@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import useForm from '../hooks/useForm.js';
 import useStateContext from '../hooks/useStateContext.js';
 import '../css/formpage.css';
+import { ENDPOINTS, endpointConnection } from '../api/index.js';
 
 // login page
 
@@ -23,16 +24,22 @@ function Login() {
         e.preventDefault();
         // connect to backend if user has valid login info
         if (validate()) {
-            /* for now it will automatically sign in as long as a username and password is
-            provided and will update the state context with the provided username. this is
-            temporary until the backend has been set up and we can create endpoints */
-            
-            // set state context to the user's username
-            setContext({login_id: values.username});
-            // redirect to home page
-            navigate('/');
-            alert("Successfully logged in!");
-            window.location.reload(false);
+            // connect to the login api in the backend
+            endpointConnection(ENDPOINTS.login)
+            .post(values)
+            .then(res => {
+                console.log(res.data);
+                // set state context to the user's username
+                setContext({login_id: res.data});
+                // redirect to profile page
+                navigate('/profile');
+                alert("Successfully logged in!");
+                window.location.reload(false);
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error);
+            })
         }
     };
 

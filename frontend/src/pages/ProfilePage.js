@@ -40,9 +40,9 @@ function Profile() {
                         <label>City: </label><br />
                         <input type="text" name="city" id="city" value={values.city} onChange={handleInputChange} size="50" required/><br />
                         <p>{errors.city}</p><br />
-                        <label for = "state"> State :  </label><br />
-                        <select id = "state" name = "state" value={values.state} required>
-                            <option value = "" disabled selected> Select State </option>
+                        <label>State :  </label><br />
+                        <select id="state" name = "state" value={values.state} onChange={handleInputChange} required>
+                            <option value = "" disabled> Select State </option>
                             <option value = "AL" > Alabama </option>
                             <option value = "AK" > Alaska </option>
                             <option value = "AZ" > Arizona </option>

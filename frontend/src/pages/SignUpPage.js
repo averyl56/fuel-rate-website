@@ -3,6 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import useForm from '../hooks/useForm.js';
 import useStateContext from '../hooks/useStateContext.js';
 import '../css/formpage.css';
+import { endpointConnection, ENDPOINTS } from '../api/index.js';
 
 // sign up page
 
@@ -23,12 +24,19 @@ function Signup() {
         e.preventDefault();
         // connect to backend if form fields are valid
         if (validate()) {
-            /* does nothing for now. will add actual account creation when the
-            backend has been created */
-            
-            // redirect to sign clear page
-            navigate('/signclear');
-            alert("New account created!");
+            // connect to the signup api in the backend
+            endpointConnection(ENDPOINTS.signup)
+            .post(values)
+            .then(res => {
+                console.log(res);
+                // redirect to sign clear page
+                navigate('/login');
+                alert("New account created!");
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error);
+            })
         }
     };
 
