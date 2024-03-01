@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // you can use this to format the form
 import '../css/formpage.css';
 import useForm from '../hooks/useForm.js';
@@ -13,7 +13,7 @@ import useStateContext from '../hooks/useStateContext.js';
 // Total Amount Due (numeric non-editable, calculated (gallons * price))
 
 const getFreshModel = () => ({
-    gallons_req: 0,
+    gallons_req: 1,
     address1: "",
     address2: "",
     state: "",
@@ -25,13 +25,17 @@ const getFreshModel = () => ({
 function FuelRate() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const {context, setContext} = useStateContext();
-
     const submitForm = () => {};
+
+    const [suggestedPrice, setSuggestedPrice] = useState("");
+    const [totalAmount, setTotalAmount] = useState("");
 
     const validate = () => {
         // set error messages in temp object, will display on page if there is an error
         let temp ={};
         temp.gallons_req = values.gallons_req > 0 ? "" : "Value must be greater than 0.";
+        const currentDate = new Date();
+        temp.delivery_date = values.delivery_date > currentDate ? "" : "Delivery date must be in the future."
         setErrors(temp);
         // checks that all error messages are blank and returns true if so
         return Object.values(temp).every(x => x == "");
@@ -45,7 +49,7 @@ function FuelRate() {
                 <div className='form-inner-box'>
                     <form name="fuelRateForm" method="post" id="fuelRateForm" onSubmit={submitForm}>
                         <label>Gallons Requested: </label><br />
-                        <input type="number" class="form-control" id="gallons_req" onChange={handleInputChange} name="gallons_req" value={values.gallons_req} required></input>
+                        <input type="number" min="1" class="form-control" id="gallons_req" onChange={handleInputChange} name="gallons_req" value={values.gallons_req} required></input>
                         
                         <label>Delivery Date</label>
                         <input type="date" class="form-control" id="delivery_date" onChange={handleInputChange} name="delivery_date" value={values.delivery_date} required></input>
@@ -66,9 +70,11 @@ function FuelRate() {
                         <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readonly></input>
                     </form>
                 </div>
-                <button className="submit-button" type="submit" value="Submit" form="profileForm">Sign In</button>
-                <p>Suggested Price: </p>
-                <p>Total Amount Due: </p>
+                <br />
+                <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Submit</button>
+                <br /><br />
+                <p>Suggested Price: {suggestedPrice} </p>
+                <p>Total Amount Due: {totalAmount} </p>
             </div>
         </div>
     );

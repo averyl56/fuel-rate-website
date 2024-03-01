@@ -29,10 +29,10 @@ function QuoteHistory() {
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Gallons Requested</th>
-                        <th>Total Price</th>
-                        <th>Date</th>
+                    <th className="black-text">ID</th>
+                        <th className="black-text">Gallons Requested</th>
+                        <th className="black-text">Total Price</th>
+                        <th className="black-text">Date</th>
                     </tr>
                 </thead>
                 <tbody>

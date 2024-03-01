@@ -1,9 +1,10 @@
 import React from 'react';
+import '../css/layout.css';
+import MapImg from '../images/map_background.jpg';
 
 function Home() {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100vw',height: '100vh', position: 'center' }}>
-            <img src="https://cdni.autocarindia.com/ExtraImages/20210608054804_Apple_Maps_new.jpg" alt="Image description" style={{ width: '1350px', height: '750px' }} />
+        <div className="home-background" style={{backgroundImage: "url("+MapImg+")"}}>
             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'orange', padding: '10px', borderRadius: '5px', textAlign: 'center',fontFamily: 'Arial' }}>
                 <p style={{ fontSize: '26px',  color: 'black' }}>Welcome to</p>
                 <p style={{ fontSize: '29px', color: 'black' }}>Fuel Tracker</p>

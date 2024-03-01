@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import Navbar from './Navbar.js';
 import '../css/layout.css';
+import BannerImg from '../images/header_banner.jpg';
 
 function TopHeader(props) {
 
@@ -35,7 +36,8 @@ function TopHeader(props) {
     return (
         <header>
             <div id='topheader'>
-                <p><strong>Fuel <span className="highlight black-word">Tracker</span></strong><img src="https://investingnews.com/media-library/oil-barrels-on-black-background-with-golden-world-map.jpg?id=33602619&width=1200&height=600&coordinates=0%2C208%2C0%2C209" alt="Image description" /></p>
+                <div id="logo"><strong>Fuel<span className="highlight black-word">Tracker</span></strong></div>
+                <div id="banner" style={{backgroundImage: "url("+BannerImg+")"}}></div>
             </div>
             <div style={{height:"60px"}}>
                 <Navbar login={props.login}/>
