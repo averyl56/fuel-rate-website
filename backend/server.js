@@ -6,6 +6,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = 5000;
+// use for database calls
+const mysql = require('mysql');
 
 app.use(cors());
 /*app.use((req,res,next) => {

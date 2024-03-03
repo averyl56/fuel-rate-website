@@ -28,7 +28,7 @@ function Signup() {
             endpointConnection(ENDPOINTS.signup)
             .post(values)
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 // redirect to sign clear page
                 navigate('/login');
                 alert("New account created!");
@@ -58,10 +58,10 @@ function Signup() {
                 <div className='form-inner-box'>
                     <form name="signupForm" method="post" id="signupForm" onSubmit={signup}> 
                         <label>Username: </label><br />
-                        <input type="text" name="username" onChange={handleInputChange} size="30" required/><br />
+                        <input type="text" name="username" value={values.username} onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.username}</p><br />
                         <label>Password: </label><br />
-                        <input type="password" name="password" onChange={handleInputChange} size="30" required/><br />
+                        <input type="password" name="password" value={values.password} onChange={handleInputChange} size="30" required/><br />
                         <p>{errors.password}</p><br />
                     </form>
                 </div>
