@@ -6,8 +6,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const port = 5000;
-// use for database calls
-const mysql = require('mysql');
 
 app.use(cors());
 /*app.use((req,res,next) => {
@@ -25,6 +23,7 @@ app.use(express.urlencoded());
 // for the profile router, create 2 routes: GET for retreiving the users info when the page is loaded and POST for changing their profile info
 // for the GET routes (profile and quote history), look up how to read parameters in the route link for the username, ex: "/profile?=username" or "/profile/username"
 // then import the router and use it down below
+// use for database calls in your router file: const mysql = require('mysql');
 
 // routes:
 
