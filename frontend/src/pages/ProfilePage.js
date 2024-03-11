@@ -16,6 +16,21 @@ const getFreshModel = () => ({
     zipcode: ""
 });
 
+// make sure to add a normal view that displays the profile info
+/* suggestion for choosing to display the the form to edit profile info:
+    -maybe create useState hook of boolean value that determines whether to show the change profile form or not
+    -an edit profile button switches the state to true, submitting the form sets it to false
+    -have 2 different components for the normal page and the form, switch which one to display depending on the state
+    -you can pass all the user information to each component by passing it as an object to the components props
+*/
+
+/* for the backend calls:
+-have the GET call that retreives the users info when they load the page in a useEffect hook
+    -include the username as a parameter in the GET request ex: endpointConnection(ENDPOINTS.quoteHistory+"/"+username)
+    -you can get the username from the useStateContext hook
+-have the POST call that submits the form to change the user's info in the function that the form calls
+*/
+
 function Profile() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     const {context, setContext} = useStateContext();

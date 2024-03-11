@@ -17,19 +17,25 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 
+// for creating different routes:
+// create a file in the router folder for each endpoint api
+// create an express router object in the file that handles each api call
+// for the profile router, create 2 routes: GET for retreiving the users info when the page is loaded and POST for changing their profile info
+// for the GET routes (profile and quote history), look up how to read parameters in the route link for the username, ex: "/profile?=username" or "/profile/username"
+// then import the router and use it down below
+// use for database calls in your router file: const mysql = require('mysql');
+
 // routes:
 
 // login route
-app.post('/login', (req, res) => {
-    let username = req.body.username;
-    res.send(username);
-});
+const login = require('./routers/login'); // import the login route from the routers folder
+app.use('/login',login); // set the login router to the login call
 
 // signup route
-app.post('/signup', (req, res) => {
-    res.send("Sign up successful");
-});
+const signup = require('./routers/signup');
+app.use('/signup',signup);
 
+// starts the server on port 5000
 app.listen(port, () => {
     console.log("Fuel Rate Website Server");
 });

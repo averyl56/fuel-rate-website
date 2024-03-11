@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './QuoteHistoryPage.css'; // Import CSS file for styling
+import '../css/QuoteHistoryPage.css'; // Import CSS file for styling
 
 // Page that shows a user's fuel quote history once they logged in
 function QuoteHistory() {
@@ -19,6 +19,11 @@ function QuoteHistory() {
     };
 
     // Fetch quotes when the component mounts
+    /* 
+    to Johnny: -add the backend GET connection call here or put it in the fetchQuotes function
+    -include the username as a parameter in the GET request ex: endpointConnection(ENDPOINTS.quoteHistory+"/"+username)
+    -you can get the username from the useStateContext hook
+    */
     useEffect(() => {
         fetchQuotes();
     }, []);
