@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './QuoteHistoryPage.css'; // Import CSS file for styling
+import '../css/QuoteHistoryPage.css';
 
 function QuoteHistory() {
     const [quotes, setQuotes] = useState([]);
