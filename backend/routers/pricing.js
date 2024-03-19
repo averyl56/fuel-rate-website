@@ -14,8 +14,6 @@ router.post('/pricing', (req, res) => {
     res.send(totalAmount);
 });
 
-router.
-
 module.exports = router;
 
 

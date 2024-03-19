@@ -12,6 +12,7 @@ export const BASE_URL = 'http://localhost:5000';
 export const ENDPOINTS = {
     login: 'login',
     signup: 'signup',
+    pricing: 'pricing',
 };
 
 // call this function to connect to the back end
