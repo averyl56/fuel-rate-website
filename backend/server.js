@@ -50,6 +50,10 @@ app.use('/pricing',pricing);
 //const profile = require('./routers/profile');
 //app.use('./profile',profile);
 
+// quote history route
+//const quotehistory = require('./routers/quotehistory');
+//app.use('./quotehistory',quotehistory);
+
 // error handler
 app.use((err, req, res, next) => {
     res.status(err.status || 500).send(err.message || 'Internal Server Error');

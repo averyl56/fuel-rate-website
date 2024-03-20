@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
                 let hashedPassword = result[0].password;
                 if (await bcrypt.compare(password,hashedPassword)) {
                     console.log("Username and password match.");
-                    res.send("Login successful!");
+                    res.send(result[0].userId);
                 }
                 else {
                     console.log("Password does not match.");

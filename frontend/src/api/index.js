@@ -10,20 +10,22 @@ export const BASE_URL = 'http://localhost:5000';
 
 // list of all endpoint connection apis
 export const ENDPOINTS = {
-    login: 'login',
-    signup: 'signup',
-    pricing: 'pricing',
+    login: '/login',
+    signup: '/signup',
+    pricing: '/pricing',
+    quotehistory: '/quotehistory',
+    profile: '/profile',
 };
 
 // call this function to connect to the back end
 export const endpointConnection = (endpoint) => {
-    let url = BASE_URL + '/' + endpoint;
+    let url = BASE_URL + endpoint;
     return {
         get: () => axios.get(url), // get request
-        get: id => axios.get(url+id), // get request with id
+        get: id => axios.get(url+'/'+id), // get request with id
         post: data => axios.post(url,data), // post request
-        put: (id,data) => axios.put(url+id,data), // put request
-        delete: id => axios.delete(url+id) // delete request
+        put: (id,data) => axios.put(url+'/'+id,data), // put request
+        delete: id => axios.delete(url+'/'+id) // delete request
     };
 };
 

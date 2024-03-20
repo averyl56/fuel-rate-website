@@ -1,21 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import useStateContext from '../hooks/useStateContext';
+import { endpointConnection,ENDPOINTS } from '../api/index.js';
 import '../css/QuoteHistoryPage.css'; // Import CSS file for styling
+
+const sampleQuotes = [
+    { id: 1, gallonsRequested: 100, totalPrice: 2000, date: '2024-02-16' },
+    { id: 2, gallonsRequested: 150, totalPrice: 3000, date: '2024-02-15' },
+    { id: 3, gallonsRequested: 200, totalPrice: 4000, date: '2024-02-14' },
+];
 
 // Page that shows a user's fuel quote history once they logged in
 function QuoteHistory() {
     // State to store the list of fuel quotes
     const [quotes, setQuotes] = useState([]);
+    const [context, setContext] = useStateContext();
 
     // Function to fetch fuel quotes from the backend
-    const fetchQuotes = () => {
-        // In a real application, you would make an API call to fetch quotes from the backend
-        // For now, we can hardcode some sample data
-        const sampleQuotes = [
-            { id: 1, gallonsRequested: 100, totalPrice: 2000, date: '2024-02-16' },
-            { id: 2, gallonsRequested: 150, totalPrice: 3000, date: '2024-02-15' },
-            { id: 3, gallonsRequested: 200, totalPrice: 4000, date: '2024-02-14' },
-        ];
-        setQuotes(sampleQuotes);
+    const fetchQuotes = (e) => {
+        e.preventDefault();
+        if (context.login_id) {
+            endpointConnection(ENDPOINTS.quotehistory)
+            .get(context.login_id)
+            .then (res => {
+                setQuotes(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+                alert(error.response.data);
+            })
+        }
+        else {
+            setQuotes(sampleQuotes);
+        }
     };
 
     // Fetch quotes when the component mounts

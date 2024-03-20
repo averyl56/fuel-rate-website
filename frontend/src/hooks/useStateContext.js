@@ -7,7 +7,7 @@ export const stateContext = createContext();
 //add login to session storage so it is saved while website is open in browser
 const getFreshContext = () => {
     if (sessionStorage.getItem('context') === null) {
-        sessionStorage.setItem('context',JSON.stringify({login_id: 0}));
+        sessionStorage.setItem('context',JSON.stringify({login_id: 0, username: ""}));
     }
     return JSON.parse(sessionStorage.getItem('context'));
 }

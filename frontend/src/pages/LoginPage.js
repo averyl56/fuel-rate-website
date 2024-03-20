@@ -30,7 +30,7 @@ function Login() {
             .then(res => {
                 console.log(res.data);
                 // set state context to the user's username
-                setContext({login_id: res.data});
+                setContext({login_id: res.data, username: values.username});
                 // redirect to profile page
                 navigate('/profile');
                 alert("Successfully logged in!");
