@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
             console.log(err);
             throw new Error("Error connecting to database."); 
         }
-        const sqlSearch = "SELECT * FROM users WHERE username = ?";
+        const sqlSearch = "SELECT * FROM UserCredentials WHERE username = ?";
 
         await db.query(sqlSearch,[username],async (err,result) => {
             if (err) {

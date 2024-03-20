@@ -22,7 +22,7 @@ router.get('/:userId', (req,res) => {
             console.log(err);
             throw new Error("Error connecting to database.");
         }
-        const sqlSearch = "SELECT * FROM quotes WHERE userId = ?";
+        const sqlSearch = "SELECT * FROM FuelQuote WHERE userId = ?";
 
         db.query(sqlSearch,[id],(err,result) => {
             if (err) {
