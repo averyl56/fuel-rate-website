@@ -38,7 +38,7 @@ this should be used when submitting forms
 endpointConnection(ENDPOINTS.someApi)   // will connect using the someApi endpoint
 .post(formData)            // submits the form data to the server
 .then(res => {             // then function returns the response from the server and contains actions to do after the connection is successful
-    let returnedData = response.data;   // response is inside response.data array
+    let returnedData = res.data;   // response is inside response.data array
     // any actions when backend successfully responds
 })
 .catch(error => {       // catch function returns error from server and contains actions to do after the connection fails
