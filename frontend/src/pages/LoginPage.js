@@ -30,7 +30,7 @@ function Login() {
             .then(res => {
                 console.log(res.data);
                 // set state context to the user's username
-                setContext({login_id: res.data, username: values.username});
+                setContext({login_id: res.data.id, username: values.username});
                 // redirect to profile page
                 navigate('/profile');
                 alert("Successfully logged in!");
@@ -38,7 +38,12 @@ function Login() {
             })
             .catch(error => {
                 console.log(error);
-                alert(error.response.data);
+                try {
+                    alert(error.response.data);
+                }
+                catch (err) {
+                    alert(error.message);
+                }
             })
         }
     };

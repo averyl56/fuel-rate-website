@@ -47,12 +47,12 @@ const pricing = require('./routers/pricing');
 app.use('/pricing',pricing);
 
 // profile route
-//const profile = require('./routers/profile');
-//app.use('./profile',profile);
+const profile = require('./routers/profile');
+app.use('/profile',profile);
 
 // quote history route
-//const quotehistory = require('./routers/quotehistory');
-//app.use('./quotehistory',quotehistory);
+const quotehistory = require('./routers/quotehistory');
+app.use('/quotehistory',quotehistory);
 
 // error handler
 app.use((err, req, res, next) => {

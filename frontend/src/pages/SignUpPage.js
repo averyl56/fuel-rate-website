@@ -35,7 +35,12 @@ function Signup() {
             })
             .catch(error => {
                 console.log(error);
-                alert(error.response.data);
+                try {
+                    alert(error.response.data);
+                }
+                catch (err) {
+                    alert(error.message);
+                }
             })
         }
     };
