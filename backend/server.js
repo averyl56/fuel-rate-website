@@ -1,6 +1,12 @@
 // main back end file
 
-// to start server, run command in backend folder: "node server.js"
+/* how to start the server:
+    run normally:
+        node server.js
+        npm run server
+    run in dev mode (will update any changes made while running)
+        npm run dev
+*/
 
 const express = require('express');
 const app = express();
@@ -24,6 +30,7 @@ app.use(express.urlencoded());
 // for the GET routes (profile and quote history), look up how to read parameters in the route link for the username, ex: "/profile?=username" or "/profile/username"
 // then import the router and use it down below
 // use for database calls in your router file: const mysql = require('mysql');
+//      all database connection info is in the .env file
 
 // routes:
 
