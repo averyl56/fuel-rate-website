@@ -22,7 +22,7 @@ router.get('/:userId', (req,res) => {
             console.log(err);
             throw new Error("Error connecting to database.");
         }
-        const sqlSearch = "SELECT name, address1, address2, city, state, zipcode FROM users WHERE userId = ?";
+        const sqlSearch = "SELECT userId, name, address1, address2, city, state, zipcode FROM ClientInformation WHERE userId = ?";
 
         db.query(sqlSearch,[id],(err,result) => {
             if (err) {
@@ -36,7 +36,7 @@ router.get('/:userId', (req,res) => {
 });
 
 router.post('/', (req,res) => {
-    let id = req.body.userId;
+    let userId = req.body.userId;
     let name = req.body.name;
     let address1 = req.body.address1;
     let address2 = req.body.address2;
@@ -71,23 +71,47 @@ router.post('/', (req,res) => {
         port: process.env.DB_PORT
     });
 
+    console.log(req.body);
+
     db.connect((err) => {
         if (err) {
             console.log(err);
             throw new Error("Error connecting to database.");
         }
-        const sqlUpdate = "UPDATE users SET name = ?, address1 = ?, address2 = ?, city = ?, state = ?, zipcode = ? WHERE userId = ?";
+        const sqlSearch = "SELECT * FROM ClientInformation WHERE userId = ?";
+        const sqlInsert = "INSERT INTO ClientInformation VALUES(0,?,?,?,?,?,?,?)";
+        const sqlUpdate = "UPDATE ClientInformation SET name = ?, address1 = ?, address2 = ?, city = ?, state = ?, zipcode = ? WHERE userId = ?";
 
-        db.query(sqlUpdate,[name,address1,address2,city,state,zipcode,id],(err,result) => {
+        db.query(sqlSearch,[userId],(err,result) => {
             if (err) {
                 console.log(err);
-                throw new Error("Error updating user info in database.");
+                throw new Error("Error searching database.");
             }
-            console.log("Updated user profile.");
-            res.send("Updated profile.");
+            console.log("Search Results:");
+            console.log(result.length);
+            if (result.length == 0)  {
+                db.query(sqlInsert,[userId,name,address1,address2,city,state,zipcode],(err,result) => {
+                    if (err) {
+                        console.log(err);
+                        throw new Error("Error adding user info in database.");
+                    }
+                    console.log("Added user profile.");
+                    res.send("Added profile.");
+                });
+            }
+            else {
+                db.query(sqlUpdate,[name,address1,address2,city,state,zipcode,userId],(err,result) => {
+                    if (err) {
+                        console.log(err);
+                        throw new Error("Error updating user info in database.");
+                    }
+                    console.log("Updated user profile.");
+                    res.send("Updated profile.");
+                });
+            }
         });
+  
     });
-
 });
 
 module.exports = router;

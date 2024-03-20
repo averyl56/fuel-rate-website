@@ -34,10 +34,10 @@ const getFreshModel = () => ({
 */
 
 function Profile() {
+    const {context, setContext} = useStateContext();
     const [userInfo, setUserInfo] = useState(getFreshModel);
     const [editProfile, setEditProfile] = useState(false);
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
-    const {context, setContext} = useStateContext();
     
     useEffect(() => {
         getUserInfo();
@@ -67,7 +67,7 @@ function Profile() {
         .get(context.login_id)
         .then(res => {
             console.log(res.data);
-            if (Object.values(res.data).every(x => x === null)) {
+            if (Object.keys(res.data).length === 0) {
                 console.log("New user");
                 setEditProfile(true);
             }
@@ -83,7 +83,6 @@ function Profile() {
     const changeUserInfo = (e) => {
         e.preventDefault();
         if (validate()) {
-            console.log("update");
             setValues({...values, userId: context.login_id});
             endpointConnection(ENDPOINTS.profile)
             .post(values)
