@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // pricing route
-router.post('/pricing', (req, res) => {
+router.post('/', (req, res) => {
     let gallons_req = req.body.gallons_req;
     // res.send(gallons_req);
     let address1 = req.body.address1;

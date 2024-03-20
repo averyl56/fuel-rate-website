@@ -6,23 +6,23 @@ require("dotenv").config();
 const router = express.Router();
 
 // signup route
-router.post('/signup', (req, res) => {
+router.post('/', async (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
     // check if username and password are within length and username doesnt have any spaces
     if (username.length > 255) {
-        throw "Username is too long.";
+        throw new Error("Username is too long.");
     }
     if (username.includes(" ")) {
-        throw "Username cannot include spaces.";
+        throw new Error("Username cannot include spaces.");
     }
     if (password.length > 255) {
-        throw "Password is too long.";
+        throw new Error("Password is too long.");
     }
 
     // encrypt password
-    let hashedPassword = bcrypt.hash(password,10);
+    let hashedPassword = await bcrypt.hash(password,10);
     const db = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
@@ -31,22 +31,31 @@ router.post('/signup', (req, res) => {
         port: process.env.DB_PORT
     });
 
-    db.connect((err) => {
-        if (err) throw (err);
+    db.connect(async (err) => {
+        if (err) {
+            console.log(err);
+            throw new Error("Error connecting to database."); 
+        }
         const sqlSearch = "SELECT * FROM users WHERE username = ?";
         const sqlInsert = "INSERT INTO users VALUES(0,?,?)"
 
-        db.query(sqlSearch,[username], (err,result) => {
-            if (err) throw (err);
+        await db.query(sqlSearch,[username], async (err,result) => {
+            if (err) {
+                console.log(err);
+                throw new Error("Error searching database.");
+            }
             console.log("Search Results:");
             console.log(result.length);
             if (result.length != 0)  {
                 console.log("Failed to create account. User already exists.")
-                throw "User already exists.";
+                throw new Error("User already exists.");
             }
             else {
-                db.query(sqlInsert,[username,hashedPassword], (err,result) => {
-                    if (err) throw (err);
+                await db.query(sqlInsert,[username,hashedPassword], async (err,result) => {
+                    if (err) {
+                        console.log(err);
+                        throw new Error("Error adding user to database.");  
+                    }
                     console.log("Created new user.");
                     res.send("Sign up successful!");
                 });

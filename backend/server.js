@@ -40,8 +40,13 @@ const pricing = require('./routers/pricing');
 app.use('/pricing',pricing);
 
 // profile route
-const profile = require('./routers/profile');
-app.use('./profile',profile);
+//const profile = require('./routers/profile');
+//app.use('./profile',profile);
+
+// error handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).send(err.message || 'Internal Server Error');
+});
 
 // starts the server on port 5000
 app.listen(port, () => {
