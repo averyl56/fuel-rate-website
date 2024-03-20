@@ -4,11 +4,11 @@ const router = express.Router();
 // pricing route
 router.post('/pricing', (req, res) => {
     let gallons_req = req.body.gallons_req;
-    res.send(gallons_req);
+    // res.send(gallons_req);
     let address1 = req.body.address1;
-    res.send(address1);
+    // res.send(address1);
     let delivery_date = req.body.delivery_date;
-    res.send(delivery_date);
+    // res.send(delivery_date);
     let suggestedPrice = req.body.suggestedPrice;
     res.send(suggestedPrice);
     res.send(totalAmount);

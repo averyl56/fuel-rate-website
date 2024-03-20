@@ -35,7 +35,16 @@ app.use('/login',login); // set the login router to the login call
 const signup = require('./routers/signup');
 app.use('/signup',signup);
 
+// pricing route
+const pricing = require('./routers/pricing');
+app.use('/pricing',pricing);
+
+// profile route
+const profile = require('./routers/profile');
+app.use('./profile',profile);
+
 // starts the server on port 5000
 app.listen(port, () => {
     console.log("Fuel Rate Website Server");
 });
+
