@@ -4,9 +4,9 @@ import { endpointConnection,ENDPOINTS } from '../api/index.js';
 import '../css/QuoteHistoryPage.css'; // Import CSS file for styling
 
 const sampleQuotes = [
-    { id: 1, gallonsRequested: 100, totalPrice: 2000, deliveryDate: '2024-02-16', suggestedPrice: 20, address: "" },
-    { id: 2, gallonsRequested: 150, totalPrice: 3000, deliveryDate: '2024-02-15', suggestedPrice: 20, address: "" },
-    { id: 3, gallonsRequested: 200, totalPrice: 4000, deliveryDate: '2024-02-14', suggestedPrice: 20, address: "" },
+    { number: 1, gallonsRequested: 100, totalPrice: 2000, deliveryDate: '2024-02-16', suggestedPrice: 20, address: "" },
+    { number: 2, gallonsRequested: 150, totalPrice: 3000, deliveryDate: '2024-02-15', suggestedPrice: 20, address: "" },
+    { number: 3, gallonsRequested: 200, totalPrice: 4000, deliveryDate: '2024-02-14', suggestedPrice: 20, address: "" },
 ];
 
 // Page that shows a user's fuel quote history once they logged in
@@ -33,12 +33,6 @@ function QuoteHistory() {
         }
     };
 
-    // Fetch quotes when the component mounts
-    /* 
-    to Johnny: -add the backend GET connection call here or put it in the fetchQuotes function
-    -include the username as a parameter in the GET request ex: endpointConnection(ENDPOINTS.quoteHistory+"/"+username)
-    -you can get the username from the useStateContext hook
-    */
     useEffect(() => {
         fetchQuotes();
     },[]);
@@ -50,7 +44,7 @@ function QuoteHistory() {
             <table>
                 <thead>
                     <tr>
-                    <th className="black-text">ID</th>
+                    <th className="black-text">Number</th>
                         <th className="black-text">Gallons Requested</th>
                         <th className="black-text">Delivery Address</th>
                         <th className="black-text">Delivery Date</th>
@@ -60,8 +54,8 @@ function QuoteHistory() {
                 </thead>
                 <tbody>
                     {quotes.map(quote => (
-                        <tr key={quote.id}>
-                            <td>{quote.id}</td>
+                        <tr key={quote.number}>
+                            <td>#{quote.number}</td>
                             <td>{quote.gallonsRequested}</td>
                             <td>{quote.address}</td>
                             <td>{quote.deliveryDate}</td>

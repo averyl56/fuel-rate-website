@@ -26,8 +26,9 @@ const getFreshModel = () => ({
 function FuelRate() {
     const {context, setContext} = useStateContext();
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
-    const [suggestedPrice, setSuggestedPrice] = useState("...");
-    const [totalAmount, setTotalAmount] = useState("...");
+    const [suggestedPrice, setSuggestedPrice] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
+    const [ready, setReady] = useState(false);
 
     useEffect(() => {
         if (context.login_id)
@@ -61,6 +62,7 @@ function FuelRate() {
                 console.log(res.data);
                 setSuggestedPrice(res.data.suggestedPrice);
                 setTotalAmount(res.data.totalAmount);
+                setReady(true);
             })
             .catch(error => {
                 console.log(error);
@@ -89,6 +91,32 @@ function FuelRate() {
         return Object.values(temp).every(x => x == "");
     };
 
+    const saveQuote = () => {
+        const quoteData = {
+            userId: values.userId,
+            gallonsRequested: values.gallonsRequested,
+            deliveryDate: values.deliveryDate,
+            address: values.address1 + " " + values.address2 + " " + values.city + ", " + values.state + " " + values.zipcode,
+            suggestedPrice: suggestedPrice,
+            totalPrice: totalAmount
+        };
+        endpointConnection(ENDPOINTS.savequote)
+        .post(quoteData)
+        .then(res => {
+            console.log(res.data);
+            alert(res.data);
+        })
+        .catch(error => {
+            console.log(error);
+                try {
+                    alert(error.response.data);
+                }
+                catch (err) {
+                    alert(error.message);
+                }
+        })
+    };
+
     return (
         <div className='form-page'>
             <div className='form-box'>
@@ -99,32 +127,39 @@ function FuelRate() {
                     <form name="fuelRateForm" method="post" id="fuelRateForm" onSubmit={getFuelRate}>
                         <label>Gallons Requested: </label><br />
                         <input type="number" min="1" class="form-control" id="gallonsRequested" onChange={handleInputChange} name="gallonsRequested" value={values.gallonsRequested} required></input>
-                        <p>{errors.gallonsRequested}</p><br />
+                        <p>{errors.gallonsRequested}</p>
                         <label>Delivery Date</label>
                         <input type="date" class="form-control" id="deliveryDate" onChange={handleInputChange} name="deliveryDate" value={values.deliveryDate} required></input>
-                        <p>{errors.deliveryDate}</p><br />
+                        <p>{errors.deliveryDate}</p>
                         <label>Delivery Address 1</label><br />
                         <input type="text" class="form-control" id="address1" name="address1" value={values.address1} readOnly={context.login_id}></input>
-                        <p>{errors.address1}</p><br />
+                        <p>{errors.address1}</p>
                         <label>Address 2: </label><br />
                         <input type="text" class="form-control" id="address2" name="address2" value={values.address2} readOnly={context.login_id}></input>
-                        <p>{errors.address2}</p><br />
+                        <p>{errors.address2}</p>
                         <label>City: </label><br />
                         <input type="text" class="form-control" id="city" name="city" value={values.city} readOnly={context.login_id}></input>
-                        <p>{errors.city}</p><br />
+                        <p>{errors.city}</p>
                         <label>State:</label>
                         <input type="text" class="form-control" id="state" name="state" value={values.state} readOnly={context.login_id}></input>
-                        <p>{errors.state}</p><br />
+                        <p>{errors.state}</p>
                         <label>Zipcode: </label><br />
                         <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readOnly={context.login_id}></input>
                         <p>{errors.zipcode}</p><br />
                     </form>
                 </div>
+                <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Get Fuel Quote</button>
                 <br />
-                <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Get Fuel Rate</button>
-                <br /><br />
-                <p>Suggested Price per Gallon: {suggestedPrice.toFixed(2)} </p>
-                <p>Total Amount Due: {totalAmount.toFixed(2)} </p>
+                {ready && <div>
+                    <br />
+                    <div className="form-inner-box">
+                        <label>Suggested Price/Gallon: </label>
+                        <input type="text" value={suggestedPrice} readonly></input><br />
+                        <label>Total Amount Due: </label>
+                        <input type="text" value={totalAmount} readonly></input><br /><br />
+                    </div>
+                    <button className="submit-button" type="button" onClick={() => saveQuote()}>Submit Quote</button>
+                </div>}
             </div>
         </div>
     );

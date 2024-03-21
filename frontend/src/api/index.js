@@ -12,7 +12,8 @@ export const BASE_URL = 'http://localhost:5000';
 export const ENDPOINTS = {
     login: '/login',
     signup: '/signup',
-    fuelrate: '/fuelrate',
+    fuelrate: '/fuelrate/getquote',
+    savequote: '/fuelrate/savequote',
     quotehistory: '/quotehistory',
     profile: '/profile',
 };
