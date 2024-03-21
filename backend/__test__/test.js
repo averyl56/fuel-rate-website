@@ -70,8 +70,91 @@ describe('Login Route', () => {
     //expect(response.text).toContain('login');
   });
 
+  it('should return an error for an too many attempts at password', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({
+        username: 'testuser',
+        password: 'wrongpassagain'
+      });
+
+    expect(response.status).toBe(404);
+    //expect(response.text).toContain('Incorrect password, try again.');
+    //expect(response.text).toContain('login');
+  });
+
 
 });
+
+describe('Quotehistory Route', () => {
+  it('fetch quotehistory incorrectly for specified username and password', async () => {
+    const response = await request(app)
+      .post('/history')
+      .send({
+        username: 'johnny',
+        password: '12345',
+        date: '2-19-2024',
+        gallons: '29',
+        money: '129',
+      });
+
+    expect(response.status).toBe(404);
+   // expect(response.text).toContain('Account does not exist.');
+   // expect(response.text).toContain('login');
+  });
+
+  
+  it('should return an error for an incorrect quote', async () => {
+    const response = await request(app)
+      .post('/quote')
+      .send({
+        username: 'johnny',
+        password: '12345',
+        date: '2-19-2024',
+        gallons: '29',
+        money: '23',
+        
+        
+      });
+
+    expect(response.status).toBe(404);
+   // expect(response.text).toContain('Account does not exist.');
+   // expect(response.text).toContain('login');
+  });
+
+  it('should return an error incorrect gallons history', async () => {
+    const response = await request(app)
+      .post('/history')
+      .send({
+        username: 'johnny',
+        password: '12345',
+        date: '2-19-2024',
+        gallons: '2',
+        money: '139',
+      });
+
+    expect(response.status).toBe(404);
+    //expect(response.text).toContain('Incorrect password, try again.');
+    //expect(response.text).toContain('login');
+  });
+
+  it('should return an error for an too many attempts at password', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({
+        username: 'testuser',
+        password: 'wrongpassagain'
+      });
+
+    expect(response.status).toBe(404);
+    //expect(response.text).toContain('Incorrect password, try again.');
+    //expect(response.text).toContain('login');
+  });
+
+
+});
+
+
 
 describe('Profile Route', () => {
   it('should submit the profile form successfully', async () => {
