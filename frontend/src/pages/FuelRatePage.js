@@ -122,7 +122,7 @@ function FuelRate() {
             <div className='form-box'>
                 <h2>Calculate Your Fuel Rate</h2>
                 <hr style={{border:'2px solid black'}}/>
-                {context.login_id == 0 && <p>Calculations will not be saved. Please log in to save your fuel quote history.</p>}
+                {context.login_id == 0 && <p>Please log in to calculate your fuel quotes.</p>}
                 <div className='form-inner-box'>
                     <form name="fuelRateForm" method="post" id="fuelRateForm" onSubmit={getFuelRate}>
                         <label>Gallons Requested: </label><br />
@@ -132,19 +132,19 @@ function FuelRate() {
                         <input type="date" class="form-control" id="deliveryDate" onChange={handleInputChange} name="deliveryDate" value={values.deliveryDate} required></input>
                         <p>{errors.deliveryDate}</p>
                         <label>Delivery Address 1</label><br />
-                        <input type="text" class="form-control" id="address1" name="address1" value={values.address1} readOnly={context.login_id}></input>
+                        <input type="text" class="form-control" id="address1" name="address1" value={values.address1} readOnly={context.login_id !== 0}></input>
                         <p>{errors.address1}</p>
                         <label>Address 2: </label><br />
-                        <input type="text" class="form-control" id="address2" name="address2" value={values.address2} readOnly={context.login_id}></input>
+                        <input type="text" class="form-control" id="address2" name="address2" value={values.address2} readOnly={context.login_id !== 0}></input>
                         <p>{errors.address2}</p>
                         <label>City: </label><br />
-                        <input type="text" class="form-control" id="city" name="city" value={values.city} readOnly={context.login_id}></input>
+                        <input type="text" class="form-control" id="city" name="city" value={values.city} readOnly={context.login_id !== 0}></input>
                         <p>{errors.city}</p>
                         <label>State:</label>
-                        <input type="text" class="form-control" id="state" name="state" value={values.state} readOnly={context.login_id}></input>
+                        <input type="text" class="form-control" id="state" name="state" value={values.state} readOnly={context.login_id !== 0}></input>
                         <p>{errors.state}</p>
                         <label>Zipcode: </label><br />
-                        <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readOnly={context.login_id}></input>
+                        <input type="text" class="form-control" id="delivery_zipcode" name="delivery_zipcode" value={values.zipcode} readOnly={context.login_id !== 0}></input>
                         <p>{errors.zipcode}</p><br />
                     </form>
                 </div>
