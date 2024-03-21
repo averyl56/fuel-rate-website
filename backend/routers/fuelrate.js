@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
     let margin = currentPrice * (locationFactor - historyFactor + gallonsRequestedFactor + companyProfitFactor);
     let suggestedPrice = currentPrice + margin;
     let totalAmount = suggestedPrice * gallonsRequested;
-    res.send({suggestedPrice: suggestedPrice, totalAmount: totalAmount});
+    res.send({suggestedPrice: suggestedPrice.toFixed(2), totalAmount: totalAmount.toFixed(2)});
 });
 
 module.exports = router;

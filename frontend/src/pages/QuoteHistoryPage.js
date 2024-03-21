@@ -65,8 +65,8 @@ function QuoteHistory() {
                             <td>{quote.gallonsRequested}</td>
                             <td>{quote.address}</td>
                             <td>{quote.deliveryDate}</td>
-                            <td>${quote.suggestedPrice.toFixed(2)}</td>
-                            <td>${quote.totalPrice.toFixed(2)}</td>
+                            <td>${quote.suggestedPrice}</td>
+                            <td>${quote.totalPrice}</td>
                         </tr>
                     ))}
                 </tbody>
