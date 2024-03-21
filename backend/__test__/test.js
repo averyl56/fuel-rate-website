@@ -154,6 +154,31 @@ describe('Quotehistory Route', () => {
 
 });
 
+describe('quote history route', () => {
+  it('checks if inputs are invalid in quotehistory router', async () => {
+    const response = await request(app).get('/HISTORY');
+    expect(response.status).toBe(404);
+    expect(response.body).to.be.an('array');
+    expect(response.body[0]).to.have.property('username').that.is.a('string');
+    expect(response.body[0]).to.have.property('requested').that.is.a('number');
+    expect(response.body[0]).to.have.property('date').that.is.a('string');
+    expect(response.body[0]).to.have.property('money').that.is.a('number');
+  });
+});
+
+describe('quotehistory', () => {
+  it('checks if inputs are valid.', async () => {
+    const response = await request(app).get('/HISTORY');
+    expect(response.status).toBe(200);
+    expect(response.body).to.be.an('array');
+    expect(response.body[0]).to.have.property('username').that.is.a('string');
+    expect(response.body[0]).to.have.property('requested').that.is.a('number');
+    expect(response.body[0]).to.have.property('date').that.is.a('string');
+    expect(response.body[0]).to.have.property('money').that.is.a('number');
+  });
+});
+
+
 
 
 describe('Profile Route', () => {
