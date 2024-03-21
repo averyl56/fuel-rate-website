@@ -43,8 +43,8 @@ const signup = require('./routers/signup');
 app.use('/signup',signup);
 
 // pricing route
-const pricing = require('./routers/pricing');
-app.use('/pricing',pricing);
+const fuelrate = require('./routers/fuelrate');
+app.use('/fuelrate',fuelrate);
 
 // profile route
 const profile = require('./routers/profile');

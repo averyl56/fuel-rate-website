@@ -12,7 +12,7 @@ export const BASE_URL = 'http://localhost:5000';
 export const ENDPOINTS = {
     login: '/login',
     signup: '/signup',
-    pricing: '/pricing',
+    fuelrate: '/fuelrate',
     quotehistory: '/quotehistory',
     profile: '/profile',
 };
