@@ -79,8 +79,7 @@ function FuelRate() {
         // set error messages in temp object, will display on page if there is an error
         let temp ={};
         temp.gallonsRequested = values.gallonsRequested > 0 ? "" : "Value must be greater than 0.";
-        const currentDate = new Date();
-        temp.deliveryDate = values.deliveryDate > currentDate ? "" : "Delivery date must be in the future.";
+        temp.deliveryDate = new Date(values.deliveryDate) > new Date() ? "" : "Delivery date must be in the future.";
         temp.address = values.address1 != "" ? "" : "You must enter an address.";
         temp.city = values.city != "" ? "" : "You must enter a city.";
         temp.state = values.state != "" ? "" : "You must select a state.";
@@ -124,8 +123,8 @@ function FuelRate() {
                 <br />
                 <button className="submit-button" type="submit" value="Submit" form="fuelRateForm">Get Fuel Rate</button>
                 <br /><br />
-                <p>Suggested Price per Gallon: {suggestedPrice} </p>
-                <p>Total Amount Due: {totalAmount} </p>
+                <p>Suggested Price per Gallon: {suggestedPrice.toFixed(2)} </p>
+                <p>Total Amount Due: {totalAmount.toFixed(2)} </p>
             </div>
         </div>
     );
