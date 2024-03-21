@@ -25,9 +25,6 @@ describe('Login Route', () => {
   });
 
   
-  
-  
-  
   it('should return an error for a non-existent username', async () => {
     const response = await request(app)
       .post('/login')
