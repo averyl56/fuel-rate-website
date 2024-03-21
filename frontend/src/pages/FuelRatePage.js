@@ -158,7 +158,7 @@ function FuelRate() {
                         <label>Total Amount Due: </label>
                         <input type="text" value={totalAmount} readonly></input><br /><br />
                     </div>
-                    <button className="submit-button" type="button" onClick={() => saveQuote()}>Submit Quote</button>
+                    {context.login_id != 0 && <button className="submit-button" type="button" onClick={() => saveQuote()}>Submit Quote</button>}
                 </div>}
             </div>
         </div>
