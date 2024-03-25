@@ -24,11 +24,11 @@ router.post('/', async (req, res) => {
     // encrypt password
     let hashedPassword = await bcrypt.hash(password,10);
     const db = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_DATABASE,
-        port: process.env.DB_PORT
+        host: "localhost",
+        user: "root",
+        password: "password",
+        database: "fuel",
+        port: 3306
     });
 
     db.connect(async (err) => {

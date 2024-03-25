@@ -8,9 +8,12 @@ const router = express.Router();
 
 // login route
 router.post('/', async (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
+    //let username = req.body.username;
+    //let password = req.body.password;
 
+    let username = 'johnny';
+    let password = '12345';
+    
     // check if username and password are within length and username doesnt have any spaces
     if (username.length > 255) {
         throw new Error("Username is too long.");
