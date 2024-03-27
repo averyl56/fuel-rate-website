@@ -40,6 +40,7 @@ function Profile() {
     const {values,setValues,errors,setErrors,handleInputChange} = useForm(getFreshModel);
     
     useEffect(() => {
+        setValues({...values, userId: context.login_id});
         getUserInfo();
     },[]);
 
@@ -83,7 +84,6 @@ function Profile() {
     const changeUserInfo = (e) => {
         e.preventDefault();
         if (validate()) {
-            setValues({...values, userId: context.login_id});
             endpointConnection(ENDPOINTS.profile)
             .post(values)
             .then(res => {

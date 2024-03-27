@@ -28,7 +28,7 @@ function Login() {
             endpointConnection(ENDPOINTS.login)
             .post(values)
             .then(res => {
-                console.log(res.data);
+                console.log(res.data.id);
                 // set state context to the user's username
                 setContext({login_id: res.data.id, username: values.username});
                 // redirect to profile page
