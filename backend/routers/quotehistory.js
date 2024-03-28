@@ -6,7 +6,7 @@ require("dotenv").config();
 const router = express.Router();
 
 // quote history route
-router.get('/:userId', (req,res) => {
+router.get('/:userId', (req,res,next) => {
     let id = req.params.userId;
 
     const db = mysql.createConnection({
@@ -20,14 +20,14 @@ router.get('/:userId', (req,res) => {
     db.connect((err) => {
         if (err) {
             console.log(err);
-            throw new Error("Error connecting to database.");
+            next(new Error("Error connecting to database."));
         }
         const sqlSearch = "SELECT * FROM FuelQuote WHERE userId = ?";
 
         db.query(sqlSearch,[id],(err,result) => {
             if (err) {
                 console.log(err);
-                throw new Error("Error searching database.");
+                next(new Error("Error searching database."));
             }
             console.log(result);
             res.send(result);
