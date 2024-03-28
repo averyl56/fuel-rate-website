@@ -89,7 +89,7 @@ describe('Login Route', () => {
 describe('Quotehistory Route', () => {
   it('fetch quotehistory incorrectly for specified username and password', async () => {
     const response = await request(app)
-      .post('/history')
+      .post('/quotehistory')
       .send({
         username: 'johnny',
         password: '12345',
@@ -353,7 +353,7 @@ describe('Fuel Rate Route', () => {
     .send({
       gallonsRequested: 5000,
       deliveryAddress: '4300 Martin Luther King Blvd', // comes from client profile, dont know how we would implement this w/ city, state, zip
-      deliveryDate: '2024-02-16',
+      deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
       totalAmount: 50000000
     });
@@ -367,7 +367,7 @@ describe('Fuel Rate Route', () => {
     .send({
       gallonsRequested: 'a',
       deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '2024-02-16',
+      deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
       totalAmount: 15000
     });
@@ -395,7 +395,7 @@ describe('Fuel Rate Route', () => {
     .send({
       gallonsRequested: 5000,
       deliveryAddress: '', 
-      deliveryDate: '1776-02-16',
+      deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
       totalAmount: 15000
     });
@@ -409,7 +409,7 @@ describe('Fuel Rate Route', () => {
     .send({
       gallonsRequested: 5000,
       deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '1776-02-16',
+      deliveryDate: '2025-02-16',
       suggestedPrice: 0,
       totalAmount: 1
     });
@@ -423,7 +423,7 @@ describe('Fuel Rate Route', () => {
     .send({
       gallonsRequested: 10,
       deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '1776-02-16',
+      deliveryDate: '2025-02-16',
       suggestedPrice: 100,
       totalAmount: 15
     });
@@ -436,9 +436,9 @@ describe('Fuel Rate Route', () => {
 describe('Signup Route', () => {
   it('should return a successful sign up creation', async () => {
     const response = await request(app)
-    .post('/signup')
+    .post('signup.js')
     .send({
-      username: 'fueltracker',
+      username: 'papajhn',
       password: 'lepookie123'
     });
     expect(response.status).toBe(200);
