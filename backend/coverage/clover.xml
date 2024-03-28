@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1711657849225" clover="3.2.0">
-  <project timestamp="1711657849225" name="All files">
-    <metrics statements="35" coveredstatements="7" conditionals="14" coveredconditionals="0" methods="3" coveredmethods="0" elements="52" coveredelements="7" complexity="0" loc="35" ncloc="35" packages="1" files="1" classes="1"/>
-    <file name="login.js" path="C:\Users\rodne\Downloads\Software Design\fuel-rate-website\backend\routers\login.js">
+<coverage generated="1711661237815" clover="3.2.0">
+  <project timestamp="1711661237815" name="All files">
+    <metrics statements="54" coveredstatements="13" conditionals="18" coveredconditionals="0" methods="6" coveredmethods="0" elements="78" coveredelements="13" complexity="0" loc="54" ncloc="54" packages="1" files="2" classes="2"/>
+    <file name="login.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\login.js">
       <metrics statements="35" coveredstatements="7" conditionals="14" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <line num="1" count="2" type="stmt"/>
-      <line num="2" count="2" type="stmt"/>
-      <line num="3" count="2" type="stmt"/>
-      <line num="5" count="2" type="stmt"/>
-      <line num="7" count="2" type="stmt"/>
-      <line num="10" count="2" type="stmt"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
       <line num="11" count="0" type="stmt"/>
       <line num="12" count="0" type="stmt"/>
       <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -35,10 +35,32 @@
       <line num="51" count="0" type="cond" truecount="0" falsecount="2"/>
       <line num="52" count="0" type="stmt"/>
       <line num="53" count="0" type="stmt"/>
-      <line num="55" count="0" type="stmt"/>
+      <line num="54" count="0" type="stmt"/>
+      <line num="57" count="0" type="stmt"/>
       <line num="58" count="0" type="stmt"/>
-      <line num="59" count="0" type="stmt"/>
-      <line num="66" count="2" type="stmt"/>
+      <line num="65" count="1" type="stmt"/>
+    </file>
+    <file name="quotehistory.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\quotehistory.js">
+      <metrics statements="19" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="4" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="10" count="0" type="stmt"/>
+      <line num="12" count="0" type="stmt"/>
+      <line num="20" count="0" type="stmt"/>
+      <line num="21" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="22" count="0" type="stmt"/>
+      <line num="23" count="0" type="stmt"/>
+      <line num="25" count="0" type="stmt"/>
+      <line num="27" count="0" type="stmt"/>
+      <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="29" count="0" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+      <line num="32" count="0" type="stmt"/>
+      <line num="33" count="0" type="stmt"/>
+      <line num="38" count="1" type="stmt"/>
     </file>
   </project>
 </coverage>
