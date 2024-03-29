@@ -44,8 +44,6 @@ router.post('/', async (req, res, next) => {
                 console.log(err);
                 next(new Error("Error searching database."));
             }
-            console.log("Search Results:");
-            console.log(result.length);
             if (result.length != 0)  {
                 console.log("Failed to create account. User already exists.")
                 next(new Error("User already exists."));

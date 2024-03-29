@@ -44,8 +44,14 @@ router.post('/', (req,res,next) => {
     let state = req.body.state;
     let zipcode = req.body.zipcode;
 
+    if (name.length == 0) {
+        next(new Error("You must submit your full name."));
+    }
     if (name.length > 50) {
         next(new Error("Name cant be over 50 characters."));
+    }
+    if (address1.length == 0) {
+        next(new Error("You must submit your address."));
     }
     if (address1.length > 100) {
         next(new Error("Address1 cant be over 100 characters."));
@@ -53,8 +59,14 @@ router.post('/', (req,res,next) => {
     if (address2.length > 100) {
         next( new Error("Address2 cant be over 100 characters."));
     }
+    if (city.length == 0) {
+        next(new Error("You must submit your city."));
+    }
     if (city.length > 100) {
         next(new Error("City cant be over 100 characters."));
+    }
+    if (state.length != 0) {
+        next(new Error("You must submit a valid state."));
     }
     if (zipcode.length > 9 || zipcode.length < 5) {
         next(new Error("Zipcode must be within 5 to 9 characters."));
@@ -71,8 +83,6 @@ router.post('/', (req,res,next) => {
         port: process.env.DB_PORT
     });
 
-    console.log(req.body);
-
     db.connect((err) => {
         if (err) {
             console.log(err);
@@ -87,8 +97,6 @@ router.post('/', (req,res,next) => {
                 console.log(err);
                 next(new Error("Error searching database."));
             }
-            console.log("Search Results:");
-            console.log(result.length);
             if (result.length == 0)  {
                 db.query(sqlInsert,[userId,name,address1,address2,city,state,zipcode],(err,result) => {
                     if (err) {
