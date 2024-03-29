@@ -12,14 +12,14 @@ router.post('/', async (req, res, next) => {
     let password = req.body.password;
 
     // check if username and password are within length and username doesnt have any spaces
-    if (username.length > 255) {
-        next(new Error("Username is too long."));
+    if (username.length > 100) {
+        return next(new Error("Username is too long."));
     }
     if (username.includes(" ")) {
-        next(new Error("Username cannot include spaces."));
+        return next(new Error("Username cannot include spaces."));
     }
-    if (password.length > 255) {
-        next(new Error("Password is too long."));
+    if (password.length > 100) {
+        return next(new Error("Password is too long."));
     }
 
     const db = mysql.createConnection({
@@ -33,18 +33,18 @@ router.post('/', async (req, res, next) => {
     db.connect(async (err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database.")); 
+            return next(new Error("Error connecting to database.")); 
         }
         const sqlSearch = "SELECT * FROM UserCredentials WHERE username = ?";
 
         await db.query(sqlSearch,[username],async (err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching database."));
+                return next(new Error("Error searching database."));
             }
             if (result.length == 0) {
                 console.log("Couldn't log in. User doesn't exist.");
-                next(new Error("User does not exist."));
+                return next(new Error("User does not exist."));
             }
             else {
                 let hashedPassword = result[0].password;
@@ -55,7 +55,7 @@ router.post('/', async (req, res, next) => {
                 }
                 else {
                     console.log("Password does not match.");
-                    next(new Error("Password is incorrect."));
+                    return next(new Error("Password is incorrect."));
                 }
             }
         });

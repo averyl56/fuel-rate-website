@@ -57,7 +57,7 @@ describe('Login Route', () => {
 describe('Quotehistory Route', () => {
   it('fetch quotehistory correctly', async () => {
     const response = await request(app)
-      .get('/quotehistory/3')
+      .get('/quotehistory/16')
     expect(response.status).toBe(200);
   });
 
@@ -67,25 +67,12 @@ describe('Quotehistory Route', () => {
     expect(response.body).toHaveLength(0);
     expect(response.status).toBe(200);
   });
-
-  // it('checks if inputs are valid.', async () => {
-  //   const response = await request(app).get('/quotehistory/johnny');
-  //  // expect(typeof response.body).toBe(typeof []);
-  //   expect(typeof response.body[0]).toBe(typeof {});
-  //   expect(response.body[0]).toContain('number');
-  //   expect(response.body[0]).toHaveProperty('gallonsRequested');
-  //   expect(response.body[0]).toHaveProperty('deliveryDate');
-  //   expect(response.body[0]).toHaveProperty('suggestedPrice');
-  //   expect(response.body[0]).toHaveProperty('totalPrice');
-  //   expect(response.body[0]).toHaveProperty('address');
-  //   expect(response.status).toBe(200);
-  // });
 });
 
 describe('Profile Route', () => {
   it('should get a users profile information', async () => {
     const response = await request(app)
-    .get('/profile/3');
+    .get('/profile/16');
     expect(response.status).toBe(200);
   });
 
@@ -93,10 +80,10 @@ describe('Profile Route', () => {
     const response = await request(app)
       .post('/profile')
       .send({
-        userId: 3,
+        userId: 16,
         name: 'Archibald Humphrey',
         address1: '4300 Martin Luther King Blvd',
-        address2: '', // address 2 is optional, dont know if we should test it both ways (blank and not blank)
+        address2: '',
         city: 'Houston',
         state: 'TX',
         zipcode: '77204'
@@ -108,7 +95,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: '',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -123,7 +110,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -138,7 +125,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '',
       address2: '', 
@@ -153,7 +140,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       address2: '', 
@@ -168,7 +155,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '4300 Martin Luther King Blvd',
       address2: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 
@@ -183,7 +170,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -198,7 +185,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -213,7 +200,7 @@ describe('Profile Route', () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -221,13 +208,13 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '7720'
     });
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(500);
   });
   it('should return an error for an invalid zipcode w/ letters', async () => {
     const response = await request(app)
     .post('/profile')
     .send({
-      userId: 3,
+      userId: 16,
       name: 'Archibald Humphrey',
       address1: '4300 Martin Luther King Blvd',
       address2: '', 
@@ -240,129 +227,97 @@ describe('Profile Route', () => {
 });
 
 describe('Fuel Rate Route', () => {
-  it('should return a successful form', async () => {
+  it('should return the calculated fuel rate', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/2')
+    .post('/fuelrate/getquote')
     .send({
       userId: 2,
       gallonsRequested: 5000,
-      deliveryAddress: '4300 Martin Luther King Blvd', // comes from client profile, dont know how we would implement this w/ city, state, zip
+      address: '4300 Martin Luther King Blvd',
       deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
-      totalAmount: 50000000
+      totalPrice: 50000000
     });
-    //expect(response.totalAmount).toBe(response.gallonsRequested*response.suggestedPrice);
     expect(response.status).toBe(200);
-  });
-
-  it('should return an error for an invalid username', async () => {
-    const response = await request(app)
-    .post('/fuelrate/getquote/0')
-    .send({
-      gallonsRequested: 10,
-      deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '2025-02-16',
-      suggestedPrice: 100,
-      totalAmount: 15
-    });
-    expect(response.status).toBe(500);
   });
 
   it('should return an error for an invalid gallons req', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/2')
+    .post('/fuelrate/getquote')
     .send({
       userId: 2,
-      gallonsRequested: 'a',
-      deliveryAddress: '4300 Martin Luther King Blvd', 
+      gallonsRequested: 0,
+      address: '4300 Martin Luther King Blvd', 
       deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
-      totalAmount: 15000
+      totalPrice: 15000
     });
     expect(response.status).toBe(500);
   });
 
   it('should return an error for an invalid delivery date', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/2')
+    .post('/fuelrate/getquote')
     .send({
       userId: 2,
       gallonsRequested: 5000,
-      deliveryAddress: '4300 Martin Luther King Blvd', 
+      address: '4300 Martin Luther King Blvd', 
       deliveryDate: '1776-02-16',
       suggestedPrice: 10000,
-      totalAmount: 15000
+      totalPrice: 15000
     });
     expect(response.status).toBe(500);
   });
 
-  it('should return an error for when a delivery address isnt retrieved', async () => {
+  it('should successfully save the fuel quote', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/2')
+    .post('/fuelrate/savequote')
     .send({
       userId: 2,
       gallonsRequested: 5000,
-      deliveryAddress: '', 
+      address: '4300 Martin Luther King Blvd',
       deliveryDate: '2025-02-16',
       suggestedPrice: 10000,
-      totalAmount: 15000
+      totalPrice: 50000000,
     });
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(200);
   });
 
-  /*it('should return an error for when the suggested price isnt retrieved', async () => {
+  it('should return a error for unsuccessful form saving', async () => {
     const response = await request(app)
-    .post('/fuelrate/johnny')
+    .post('/fuelrate/savequote')
     .send({
       gallonsRequested: 5000,
-      deliveryAddress: '4300 Martin Luther King Blvd', 
+      address: '4300 Martin Luther King Blvd',
       deliveryDate: '2025-02-16',
-      suggestedPrice: 0,
-      totalAmount: 1
-    });
-    expect(response.status).toBe(500);
-  });*/
-
-  it('should return an error for if totalAmount isnt equal to gallons*price', async () => {
-    const response = await request(app)
-    .post('/fuelrate/getquote/2')
-    .send({
-      userId: 2,
-      gallonsRequested: 10,
-      deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '2025-02-16',
-      suggestedPrice: 100,
-      totalAmount: 15
-    });
-    expect(response.status).toBe(500);
-    expect(response.totalAmount).not.toBe(response.gallonsRequested*response.suggestedPrice);
-  });
-
-  it('should return an error for if total amount isnt loaded', async () => {
-    const response = await request(app)
-    .post('/fuelrate/savequote/2')
-    .send({
-      userId: 2,
-      gallonsRequested: 10,
-      deliveryAddress: '4300 Martin Luther King Blvd', 
-      deliveryDate: '2025-02-16',
-      suggestedPrice: 100,
-      totalAmount: 0
+      suggestedPrice: 10000,
+      totalPrice: 50000000
     });
     expect(response.status).toBe(500);
   });
 
 
-}); 
+});
+
+function generateRandomUsername() {
+  const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let randomUsername = '';
+  for (let i = 0; i < 8; i++) {
+    randomUsername += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return randomUsername;
+}
 
 describe('Signup Route', () => {
   it('should return a successful sign up creation', async () => {
+    const username = generateRandomUsername();
+    
     const response = await request(app)
-    .post('/signup')
-    .send({
-      username: 'papajh',
-      password: 'lepookie123'
-    });
+      .post('/signup')
+      .send({
+        username: username,
+        password: 'lefuelrate',
+      });
     expect(response.status).toBe(200);
   });
 

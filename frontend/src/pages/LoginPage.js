@@ -68,10 +68,10 @@ function Login() {
                 <div className='form-inner-box'>
                     <form name="loginForm" method="post" id="loginForm" onSubmit={login}>
                         <label>Username: </label><br />
-                        <input type="text" name="username" value={values.username} onChange={handleInputChange} size="30" required/><br />
+                        <input type="text" name="username" value={values.username} onChange={handleInputChange} size="30" maxLength="100" required/><br />
                         <p>{errors.username}</p><br />
                         <label>Password: </label><br />
-                        <input type="password" name="password" value={values.password} onChange={handleInputChange} size="30" required/><br />
+                        <input type="password" name="password" value={values.password} onChange={handleInputChange} size="30" maxLength="100" required/><br />
                         <p>{errors.password}</p><br />
                     </form>
                 </div>

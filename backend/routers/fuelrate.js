@@ -9,7 +9,15 @@ const router = express.Router();
 router.post('/getquote', async (req, res, next) => {
     let userId = req.body.userId;
     let gallonsRequested = req.body.gallonsRequested;
+    let deliveryDate = req.body.deliveryDate;
     let state = req.body.state;
+
+    if (gallonsRequested < 1) {
+        return next(new Error("Choose the number of gallons to request."));
+    }
+    if (new Date(deliveryDate) < new Date()) {
+        return next(new Error("Delivery date must be in the future."));
+    }
 
     const db = mysql.createConnection({
         host: process.env.DB_HOST,
@@ -24,7 +32,7 @@ router.post('/getquote', async (req, res, next) => {
     db.connect(async (err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database."));
+            return next(new Error("Error connecting to database."));
         }
 
         // find if user has fuel quote history
@@ -32,7 +40,7 @@ router.post('/getquote', async (req, res, next) => {
         await db.query(sqlHistoryCount,[userId], (err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching user's fuel quote history."));
+                return next(new Error("Error searching user's fuel quote history."));
             }
             historyFactor = (result[0]['COUNT(*)'] > 0) ? 0.01 : 0;
             let locationFactor = (state == "TX") ? 0.02 : 0.04;
@@ -67,13 +75,13 @@ router.post('/savequote', async (req,res,next) => {
     db.connect(async (err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database."));
+            return next(new Error("Error connecting to database."));
         }
         sqlCount = "SELECT COUNT(*) FROM FuelQuote WHERE userId = ?";
         await db.query(sqlCount,[userId], async (err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching user's fuel quote history."));
+                return next(new Error("Error searching user's fuel quote history."));
             }
             number += result[0]['COUNT(*)'];
             console.log(number)
@@ -81,7 +89,7 @@ router.post('/savequote', async (req,res,next) => {
             await db.query(sqlInsert,[userId,number,gallonsRequested,address,deliveryDate,suggestedPrice,totalPrice],async (err,result) => {
                 if (err) {
                     console.log(err);
-                    next(new Error("Error adding fuel quote to user's history."));
+                    return next(new Error("Error adding fuel quote to user's history."));
                 }
                 console.log("Saved fuel quote history.");
                 res.send("Your fuel quote has been saved!");

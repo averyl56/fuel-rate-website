@@ -20,14 +20,14 @@ router.get('/:userId', (req,res,next) => {
     db.connect((err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database."));
+            return next(new Error("Error connecting to database."));
         }
         const sqlSearch = "SELECT userId, name, address1, address2, city, state, zipcode FROM ClientInformation WHERE userId = ?";
 
         db.query(sqlSearch,[id],(err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching database."));
+                return next(new Error("Error searching database."));
             }
             console.log(result[0]);
             res.send(result[0]);
@@ -45,34 +45,34 @@ router.post('/', (req,res,next) => {
     let zipcode = req.body.zipcode;
 
     if (name.length == 0) {
-        next(new Error("You must submit your full name."));
+        return next(new Error("You must submit your full name."));
     }
     if (name.length > 50) {
-        next(new Error("Name cant be over 50 characters."));
+        return next(new Error("Name cant be over 50 characters."));
     }
     if (address1.length == 0) {
-        next(new Error("You must submit your address."));
+        return next(new Error("You must submit your address."));
     }
     if (address1.length > 100) {
-        next(new Error("Address1 cant be over 100 characters."));
+        return next(new Error("Address1 cant be over 100 characters."));
     }
     if (address2.length > 100) {
-        next( new Error("Address2 cant be over 100 characters."));
+        return next( new Error("Address2 cant be over 100 characters."));
     }
     if (city.length == 0) {
-        next(new Error("You must submit your city."));
+        return next(new Error("You must submit your city."));
     }
     if (city.length > 100) {
-        next(new Error("City cant be over 100 characters."));
+        return next(new Error("City cant be over 100 characters."));
     }
-    if (state.length != 0) {
-        next(new Error("You must submit a valid state."));
+    if (state.length != 2) {
+        return next(new Error("You must submit a valid state."));
     }
     if (zipcode.length > 9 || zipcode.length < 5) {
-        next(new Error("Zipcode must be within 5 to 9 characters."));
+        return next(new Error("Zipcode must be within 5 to 9 characters."));
     }
     if (isNaN(zipcode)) {
-        next(new Error("Zipcode can only contain digits."));
+        return next(new Error("Zipcode can only contain digits."));
     }
 
     const db = mysql.createConnection({
@@ -86,7 +86,7 @@ router.post('/', (req,res,next) => {
     db.connect((err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database."));
+            return next(new Error("Error connecting to database."));
         }
         const sqlSearch = "SELECT * FROM ClientInformation WHERE userId = ?";
         const sqlInsert = "INSERT INTO ClientInformation VALUES(0,?,?,?,?,?,?,?)";
@@ -95,13 +95,13 @@ router.post('/', (req,res,next) => {
         db.query(sqlSearch,[userId],(err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching database."));
+                return next(new Error("Error searching database."));
             }
             if (result.length == 0)  {
                 db.query(sqlInsert,[userId,name,address1,address2,city,state,zipcode],(err,result) => {
                     if (err) {
                         console.log(err);
-                        next(new Error("Error adding user info in database."));
+                        return next(new Error("Error adding user info in database."));
                     }
                     console.log("Added user profile.");
                     res.send("Added profile.");
@@ -111,7 +111,7 @@ router.post('/', (req,res,next) => {
                 db.query(sqlUpdate,[name,address1,address2,city,state,zipcode,userId],(err,result) => {
                     if (err) {
                         console.log(err);
-                        next(new Error("Error updating user info in database."));
+                        return next(new Error("Error updating user info in database."));
                     }
                     console.log("Updated user profile.");
                     res.send("Updated profile.");

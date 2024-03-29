@@ -11,14 +11,14 @@ router.post('/', async (req, res, next) => {
     let password = req.body.password;
 
     // check if username and password are within length and username doesnt have any spaces
-    if (username.length > 255) {
-        next(new Error("Username is too long."));
+    if (username.length > 100) {
+        return next(new Error("Username is too long."));
     }
     if (username.includes(" ")) {
-        next(new Error("Username cannot include spaces."));
+        return next(new Error("Username cannot include spaces."));
     }
-    if (password.length > 255) {
-        next(new Error("Password is too long."));
+    if (password.length > 100) {
+        return next(new Error("Password is too long."));
     }
 
     // encrypt password
@@ -34,7 +34,7 @@ router.post('/', async (req, res, next) => {
     db.connect(async (err) => {
         if (err) {
             console.log(err);
-            next(new Error("Error connecting to database.")); 
+            return next(new Error("Error connecting to database.")); 
         }
         const sqlSearch = "SELECT * FROM UserCredentials WHERE username = ?";
         const sqlInsert = "INSERT INTO UserCredentials VALUES(0,?,?)"
@@ -42,17 +42,17 @@ router.post('/', async (req, res, next) => {
         await db.query(sqlSearch,[username], async (err,result) => {
             if (err) {
                 console.log(err);
-                next(new Error("Error searching database."));
+                return next(new Error("Error searching database."));
             }
             if (result.length != 0)  {
                 console.log("Failed to create account. User already exists.")
-                next(new Error("User already exists."));
+                return next(new Error("User already exists."));
             }
             else {
                 await db.query(sqlInsert,[username,hashedPassword], async (err,result) => {
                     if (err) {
                         console.log(err);
-                        next(new Error("Error adding user to database."));  
+                        return next(new Error("Error adding user to database."));  
                     }
                     console.log("Created new user.");
                     res.send("Sign up successful!");
