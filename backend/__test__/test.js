@@ -242,7 +242,7 @@ describe('Profile Route', () => {
 describe('Fuel Rate Route', () => {
   it('should return a successful form', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/johnny')
+    .post('/fuelrate/getquote/2')
     .send({
       userId: 2,
       gallonsRequested: 5000,
@@ -257,7 +257,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for an invalid username', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/invalidName')
+    .post('/fuelrate/getquote/0')
     .send({
       gallonsRequested: 10,
       deliveryAddress: '4300 Martin Luther King Blvd', 
@@ -270,7 +270,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for an invalid gallons req', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/johnny')
+    .post('/fuelrate/getquote/2')
     .send({
       userId: 2,
       gallonsRequested: 'a',
@@ -284,7 +284,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for an invalid delivery date', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/johnny')
+    .post('/fuelrate/getquote/2')
     .send({
       userId: 2,
       gallonsRequested: 5000,
@@ -298,7 +298,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for when a delivery address isnt retrieved', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/johnny')
+    .post('/fuelrate/getquote/2')
     .send({
       userId: 2,
       gallonsRequested: 5000,
@@ -325,7 +325,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for if totalAmount isnt equal to gallons*price', async () => {
     const response = await request(app)
-    .post('/fuelrate/getquote/johnny')
+    .post('/fuelrate/getquote/2')
     .send({
       userId: 2,
       gallonsRequested: 10,
@@ -340,7 +340,7 @@ describe('Fuel Rate Route', () => {
 
   it('should return an error for if total amount isnt loaded', async () => {
     const response = await request(app)
-    .post('/fuelrate/savequote/johnny')
+    .post('/fuelrate/savequote/2')
     .send({
       userId: 2,
       gallonsRequested: 10,
