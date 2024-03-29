@@ -53,11 +53,11 @@ function Login() {
     const validate = () => {
         // set error messages in temp object, will display on page if there is an error
         let temp ={};
-        temp.username = values.username != "" ? "" : "You must enter a username.";
-        temp.password = values.password != "" ? "" : "You must enter a password.";
+        temp.username = values.username !== "" ? "" : "You must enter a username.";
+        temp.password = values.password !== "" ? "" : "You must enter a password.";
         setErrors(temp);
         // checks that all error messages are blank and returns true if so
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     };
 
     return (

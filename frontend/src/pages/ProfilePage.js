@@ -52,15 +52,15 @@ function Profile() {
     const validate = () => {
         // set error messages in temp object, will display on page if there is an error
         let temp ={};
-        temp.name = values.name != "" ? "" : "You must enter a name.";
-        temp.address = values.address1 != "" ? "" : "You must enter an address.";
-        temp.city = values.city != "" ? "" : "You must enter a city.";
-        temp.state = values.state != "" ? "" : "You must select a state.";
-        temp.zipcode = values.zipcode != "" ? "" : "You must enter a zip code.";
+        temp.name = values.name !== "" ? "" : "You must enter a name.";
+        temp.address = values.address1 !== "" ? "" : "You must enter an address.";
+        temp.city = values.city !== "" ? "" : "You must enter a city.";
+        temp.state = values.state !== "" ? "" : "You must select a state.";
+        temp.zipcode = values.zipcode !== "" ? "" : "You must enter a zip code.";
         setErrors(temp);
         // checks that all error messages are blank and returns true if so
         console.log(temp)
-        return Object.values(temp).every(x => x == "");
+        return Object.values(temp).every(x => x === "");
     };
     
     const getUserInfo = () => {
