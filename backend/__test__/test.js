@@ -25,9 +25,8 @@ const router3 = require('../routers/profile.js');
 const router4 = require('../routers/quotehistory.js');
 const router5 = require('../routers/signup.js');
 
-const app = express();
+const app = require('../server.js');
 // Define your routes and middleware
-module.exports = app;
 
 describe('Login Route', () => {
   it('should log in successfully', async () => {

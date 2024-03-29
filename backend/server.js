@@ -64,3 +64,4 @@ app.listen(port, () => {
     console.log("Fuel Rate Website Server");
 });
 
+module.exports = app;
