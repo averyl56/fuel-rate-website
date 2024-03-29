@@ -127,17 +127,16 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a>
-<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,7 +180,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -193,7 +191,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const express = require('express');
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 &nbsp;
@@ -202,19 +200,19 @@ require("dotenv").config();
 const router = express.Router();
 &nbsp;
 // login route
-router.post('/', <span class="fstat-no" title="function not covered" >as</span>ync (req, res) =&gt; {
+router.post('/', <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
     let username = <span class="cstat-no" title="statement not covered" >req.body.username;</span>
     let password = <span class="cstat-no" title="statement not covered" >req.body.password;</span>
 &nbsp;
     // check if username and password are within length and username doesnt have any spaces
 <span class="cstat-no" title="statement not covered" >    if (username.length &gt; 255) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error("Username is too long.");</span>
+<span class="cstat-no" title="statement not covered" >        next(new Error("Username is too long."));</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (username.includes(" ")) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error("Username cannot include spaces.");</span>
+<span class="cstat-no" title="statement not covered" >        next(new Error("Username cannot include spaces."));</span>
     }
 <span class="cstat-no" title="statement not covered" >    if (password.length &gt; 255) {</span>
-<span class="cstat-no" title="statement not covered" >        throw new Error("Password is too long.");</span>
+<span class="cstat-no" title="statement not covered" >        next(new Error("Password is too long."));</span>
     }
 &nbsp;
     const db = <span class="cstat-no" title="statement not covered" >mysql.createConnection({</span>
@@ -228,30 +226,29 @@ router.post('/', <span class="fstat-no" title="function not covered" >as</span>y
 <span class="cstat-no" title="statement not covered" >    db.connect(<span class="fstat-no" title="function not covered" >as</span>ync (err) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        if (err) {</span>
 <span class="cstat-no" title="statement not covered" >            console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >            throw new Error("Error connecting to database."); </span>
+<span class="cstat-no" title="statement not covered" >            next(new Error("Error connecting to database.")); </span>
         }
         const sqlSearch = <span class="cstat-no" title="statement not covered" >"SELECT * FROM UserCredentials WHERE username = ?";</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        await db.query(sqlSearch,[username],<span class="fstat-no" title="function not covered" >as</span>ync (err,result) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >            if (err) {</span>
 <span class="cstat-no" title="statement not covered" >                console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >                throw new Error("Error searching database.");</span>
+<span class="cstat-no" title="statement not covered" >                next(new Error("Error searching database."));</span>
             }
 <span class="cstat-no" title="statement not covered" >            if (result.length == 0) {</span>
 <span class="cstat-no" title="statement not covered" >                console.log("Couldn't log in. User doesn't exist.");</span>
-<span class="cstat-no" title="statement not covered" >                throw new Error("User does not exist.");</span>
+<span class="cstat-no" title="statement not covered" >                next(new Error("User does not exist."));</span>
             }
             else {
                 let hashedPassword = <span class="cstat-no" title="statement not covered" >result[0].password;</span>
 <span class="cstat-no" title="statement not covered" >                if (await bcrypt.compare(password,hashedPassword)) {</span>
 <span class="cstat-no" title="statement not covered" >                    console.log("Username and password match.");</span>
 <span class="cstat-no" title="statement not covered" >                    console.log(result[0].userId);</span>
-                    //res.send({id: result[0].userId});
-<span class="cstat-no" title="statement not covered" >                    res.sendStatus(200);</span>
+<span class="cstat-no" title="statement not covered" >                    res.send({id: result[0].userId});</span>
                 }
                 else {
 <span class="cstat-no" title="statement not covered" >                    console.log("Password does not match.");</span>
-<span class="cstat-no" title="statement not covered" >                    throw new Error("Password is incorrect.");</span>
+<span class="cstat-no" title="statement not covered" >                    next(new Error("Password is incorrect."));</span>
                 }
             }
         });
@@ -265,7 +262,7 @@ module.exports = router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-03-28T20:30:49.204Z
+                at 2024-03-29T20:11:59.542Z
             </div>
         <script src="prettify.js"></script>
         <script>
