@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <coverage generated="1711743200876" clover="3.2.0">
   <project timestamp="1711743200876" name="All files">
     <metrics statements="215" coveredstatements="34" conditionals="76" coveredconditionals="0" methods="25" coveredmethods="0" elements="316" coveredelements="34" complexity="0" loc="215" ncloc="215" packages="1" files="5" classes="5"/>
@@ -62,6 +63,12 @@
       <line num="93" count="1" type="stmt"/>
     </file>
     <file name="login.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\login.js">
+=======
+<coverage generated="1711743119562" clover="3.2.0">
+  <project timestamp="1711743119562" name="All files">
+    <metrics statements="54" coveredstatements="13" conditionals="18" coveredconditionals="0" methods="6" coveredmethods="0" elements="78" coveredelements="13" complexity="0" loc="54" ncloc="54" packages="1" files="2" classes="2"/>
+    <file name="login.js" path="C:\Users\Avery Lindseth\Desktop\Code Projects\fuel-rate-website\backend\routers\login.js">
+>>>>>>> c73b0e635441451d78389b4b334d91bff4d1b634
       <metrics statements="35" coveredstatements="7" conditionals="14" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
@@ -99,6 +106,7 @@
       <line num="58" count="0" type="stmt"/>
       <line num="65" count="1" type="stmt"/>
     </file>
+<<<<<<< HEAD
     <file name="profile.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\profile.js">
       <metrics statements="67" coveredstatements="7" conditionals="28" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <line num="1" count="1" type="stmt"/>
@@ -170,6 +178,9 @@
       <line num="117" count="1" type="stmt"/>
     </file>
     <file name="quotehistory.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\quotehistory.js">
+=======
+    <file name="quotehistory.js" path="C:\Users\Avery Lindseth\Desktop\Code Projects\fuel-rate-website\backend\routers\quotehistory.js">
+>>>>>>> c73b0e635441451d78389b4b334d91bff4d1b634
       <metrics statements="19" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
@@ -190,6 +201,7 @@
       <line num="32" count="0" type="stmt"/>
       <line num="33" count="0" type="stmt"/>
       <line num="38" count="1" type="stmt"/>
+<<<<<<< HEAD
     </file>
     <file name="signup.js" path="C:\Users\Lam\Desktop\fuel-website\fuel-rate-website\backend\routers\signup.js">
       <metrics statements="38" coveredstatements="7" conditionals="14" coveredconditionals="0" methods="4" coveredmethods="0"/>
@@ -231,6 +243,8 @@
       <line num="59" count="0" type="stmt"/>
       <line num="60" count="0" type="stmt"/>
       <line num="67" count="1" type="stmt"/>
+=======
+>>>>>>> c73b0e635441451d78389b4b334d91bff4d1b634
     </file>
   </project>
 </coverage>

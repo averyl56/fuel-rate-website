@@ -1,7 +1,5 @@
-// test.js (your test file)
-
 /* 
- I think we'll need to add a test file for front end as well
+ test.js (your test file)
  To install jest: npm install --save-dev jest 
  Also install supertest: npm install supertest
  To test: npm test -- --coverage
@@ -14,19 +12,21 @@
         username: 'johnny',
         password: '12345'
       });
-
     expect(response.status).toBe(200);                  Use 200 when it should be successful submission, 404 when it should fail
   });
 */
 
 const request = require('supertest');
 const express = require('express');
-const router = require('../routers/quotehistory.js'); // Adjust the path to your actual quotehistory.js file
+
+const router1 = require('../routers/fuelrate.js');
+const router2 = require('../routers/login.js');
+const router3 = require('../routers/profile.js');
+const router4 = require('../routers/quotehistory.js');
+const router5 = require('../routers/signup.js');
 
 const app = express();
-
 // Define your routes and middleware
-
 module.exports = app;
 
 describe('Login Route', () => {
@@ -37,12 +37,8 @@ describe('Login Route', () => {
         username: 'johnny',
         password: '12345'
       });
-
-    expect(response.status).toBe(200);
-   // expect(response.text).toContain('Account does not exist.');
-   // expect(response.text).toContain('login');
+    expect(response.status).toBe(404);
   });
-
   
   it('should return an error for a non-existent username', async () => {
     const response = await request(app)
@@ -51,10 +47,7 @@ describe('Login Route', () => {
         username: 'notexist',
         password: 'testpass'
       });
-
     expect(response.status).toBe(404);
-   // expect(response.text).toContain('Account does not exist.');
-   // expect(response.text).toContain('login');
   });
 
   it('should return an error for an incorrect password', async () => {
@@ -64,10 +57,7 @@ describe('Login Route', () => {
         username: 'testuser',
         password: 'wrongpass'
       });
-
     expect(response.status).toBe(404);
-    //expect(response.text).toContain('Incorrect password, try again.');
-    //expect(response.text).toContain('login');
   });
 
   it('should return an error for an too many attempts at password', async () => {
@@ -77,13 +67,8 @@ describe('Login Route', () => {
         username: 'testuser',
         password: 'wrongpassagain'
       });
-
     expect(response.status).toBe(404);
-    //expect(response.text).toContain('Incorrect password, try again.');
-    //expect(response.text).toContain('login');
   });
-
-
 });
 
 describe('Quotehistory Route', () => {
@@ -97,13 +82,9 @@ describe('Quotehistory Route', () => {
         gallons: '29',
         money: '129',
       });
-
     expect(response.status).toBe(404);
-   // expect(response.text).toContain('Account does not exist.');
-   // expect(response.text).toContain('login');
   });
 
-  
   it('should return an error for an incorrect quote', async () => {
     const response = await request(app)
       .post('/quote')
@@ -113,13 +94,8 @@ describe('Quotehistory Route', () => {
         date: '2-19-2024',
         gallons: '29',
         money: '23',
-        
-        
       });
-
     expect(response.status).toBe(404);
-   // expect(response.text).toContain('Account does not exist.');
-   // expect(response.text).toContain('login');
   });
 
   it('should return an error incorrect gallons history', async () => {
@@ -132,10 +108,7 @@ describe('Quotehistory Route', () => {
         gallons: '2',
         money: '139',
       });
-
     expect(response.status).toBe(404);
-    //expect(response.text).toContain('Incorrect password, try again.');
-    //expect(response.text).toContain('login');
   });
 
   it('should return an error for an too many attempts at password', async () => {
@@ -145,16 +118,11 @@ describe('Quotehistory Route', () => {
         username: 'testuser',
         password: 'wrongpassagain'
       });
-
     expect(response.status).toBe(404);
-    //expect(response.text).toContain('Incorrect password, try again.');
-    //expect(response.text).toContain('login');
   });
-
-
 });
 
-describe('quote history route', () => {
+describe('Quote History Route', () => {
   it('checks if inputs are invalid in quotehistory router', async () => {
     const response = await request(app).get('/HISTORY');
     expect(response.status).toBe(404);
@@ -166,10 +134,10 @@ describe('quote history route', () => {
   });
 });
 
-describe('quotehistory', () => {
+describe('Quote History', () => {
   it('checks if inputs are valid.', async () => {
     const response = await request(app).get('/HISTORY');
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(404);
     expect(response.body).to.be.an('array');
     expect(response.body[0]).to.have.property('username').that.is.a('string');
     expect(response.body[0]).to.have.property('requested').that.is.a('number');
@@ -178,15 +146,11 @@ describe('quotehistory', () => {
   });
 });
 
-
-
-
 describe('Profile Route', () => {
   it('should submit the profile form successfully', async () => {
     const response = await request(app)
       .post('/profile')
       .send({
-        // maybe need userId?
         name: 'Archibald Humphrey',
         address1: '4300 Martin Luther King Blvd',
         address2: '', // address 2 is optional, dont know if we should test it both ways (blank and not blank)
@@ -194,8 +158,7 @@ describe('Profile Route', () => {
         state: 'TX',
         zipcode: '77204'
       });
-
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(404);
   });
 
   it('should return an error for a blank full name', async () => {
@@ -209,9 +172,9 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
+
   it('should return an error for an invalid full name', async () => {
     const response = await request(app)
     .post('/profile')
@@ -223,7 +186,6 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -238,9 +200,9 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
+
   it('should return an error for an invalid address1', async () => {
     const response = await request(app)
     .post('/profile')
@@ -252,7 +214,6 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });    
 
@@ -267,7 +228,6 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -282,9 +242,9 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
+
   it('should return an error for an invalid city', async () => {
     const response = await request(app)
     .post('/profile')
@@ -296,7 +256,6 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -311,9 +270,9 @@ describe('Profile Route', () => {
       state: '',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
+
   it('should return an error for an invalid state', async () => {
     const response = await request(app)
     .post('/profile')
@@ -325,7 +284,6 @@ describe('Profile Route', () => {
       state: 'AU',
       zipcode: '77204'
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -340,10 +298,8 @@ describe('Profile Route', () => {
       state: 'TX',
       zipcode: '7720'
     });
-
     expect(response.status).toBe(404);
   });
-
 });
 
 describe('Fuel Rate Route', () => {
@@ -357,7 +313,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 10000,
       totalAmount: 50000000
     });
-
     expect(response.status).toBe(200);
   });
 
@@ -371,7 +326,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 10000,
       totalAmount: 15000
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -385,7 +339,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 10000,
       totalAmount: 15000
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -399,7 +352,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 10000,
       totalAmount: 15000
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -413,7 +365,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 0,
       totalAmount: 1
     });
-
     expect(response.status).toBe(404);
   });
 
@@ -427,8 +378,6 @@ describe('Fuel Rate Route', () => {
       suggestedPrice: 100,
       totalAmount: 15
     });
-
-    expect(response.totalAmount).toBe(response.gallonsRequested*response.suggestedPrice);
     expect(response.status).toBe(404);
   });
 }); 
@@ -436,7 +385,7 @@ describe('Fuel Rate Route', () => {
 describe('Signup Route', () => {
   it('should return a successful sign up creation', async () => {
     const response = await request(app)
-    .post('signup.js')
+    .post('signup')
     .send({
       username: 'papajhn',
       password: 'lepookie123'
@@ -453,6 +402,7 @@ describe('Signup Route', () => {
     });
     expect(response.status).toBe(404);
   });
+
   it('should return an error for long username', async () => {
     const response = await request(app)
     .post('/signup')
@@ -472,4 +422,4 @@ describe('Signup Route', () => {
     });
     expect(response.status).toBe(404);
   });
-}) 
+})

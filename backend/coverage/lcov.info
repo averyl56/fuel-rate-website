@@ -158,6 +158,7 @@ BRF:14
 BRH:0
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:routers\profile.js
 FN:9,(anonymous_0)
 FN:20,(anonymous_1)
@@ -278,6 +279,8 @@ BRF:28
 BRH:0
 end_of_record
 TN:
+=======
+>>>>>>> c73b0e635441451d78389b4b334d91bff4d1b634
 SF:routers\quotehistory.js
 FN:9,(anonymous_0)
 FN:20,(anonymous_1)
@@ -315,6 +318,7 @@ BRDA:28,1,1,0
 BRF:4
 BRH:0
 end_of_record
+<<<<<<< HEAD
 TN:
 SF:routers\signup.js
 FN:9,(anonymous_0)
@@ -384,3 +388,5 @@ BRDA:55,6,1,0
 BRF:14
 BRH:0
 end_of_record
+=======
+>>>>>>> c73b0e635441451d78389b4b334d91bff4d1b634
