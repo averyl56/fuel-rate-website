@@ -23,7 +23,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '64a582a0-e6e8-11ee-a8cb-9ef3c5aabb92:1-82';
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '64a582a0-e6e8-11ee-a8cb-9ef3c5aabb92:1-169';
 
 --
 -- Table structure for table `ClientInformation`
@@ -43,8 +43,8 @@ CREATE TABLE `ClientInformation` (
   `zipcode` varchar(9) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userIdProfile_idx` (`userId`),
-  CONSTRAINT `userIdProfile` FOREIGN KEY (`userId`) REFERENCES `UserCredentials` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `userIdProfile` FOREIGN KEY (`userId`) REFERENCES `UserCredentials` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -53,7 +53,7 @@ CREATE TABLE `ClientInformation` (
 
 LOCK TABLES `ClientInformation` WRITE;
 /*!40000 ALTER TABLE `ClientInformation` DISABLE KEYS */;
-INSERT INTO `ClientInformation` VALUES (6,1,'Avery Lindseth','1234 Main Street','','Houston','TX','77002');
+INSERT INTO `ClientInformation` VALUES (6,1,'Avery Lindseth','1234 Main Street','','Houston','TX','77002'),(11,15,'Avery Lindseth','1234 Some Street','','Houston','TX','77002'),(12,16,'Archibald Humphrey','4300 Martin Luther King Blvd','','Houston','TX','77204'),(13,13,'Rodney Hong','12345 Apple St','','Houston','TX','77429'),(14,2,'Johnny Bravo','1234 Main Street','','Houston','TX','77002');
 /*!40000 ALTER TABLE `ClientInformation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,8 +75,8 @@ CREATE TABLE `FuelQuote` (
   `totalPrice` double NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userId_idx` (`userId`),
-  CONSTRAINT `userIdQuotes` FOREIGN KEY (`userId`) REFERENCES `UserCredentials` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `userIdQuotes` FOREIGN KEY (`userId`) REFERENCES `UserCredentials` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +85,7 @@ CREATE TABLE `FuelQuote` (
 
 LOCK TABLES `FuelQuote` WRITE;
 /*!40000 ALTER TABLE `FuelQuote` DISABLE KEYS */;
-INSERT INTO `FuelQuote` VALUES (10,1,1,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.73,172.5),(11,1,2,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.71,171),(12,1,3,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.71,171);
+INSERT INTO `FuelQuote` VALUES (10,1,1,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.73,172.5),(11,1,2,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.71,171),(12,1,3,100,'1234 Main Street  Houston, TX 77002','2024-03-28',1.71,171),(13,13,1,1,'12345 Apple St  Houston, TX 77429','2024-04-16',1.73,1.73),(14,2,1,100,'1234 Main Street  Houston, TX 77002','2024-03-31',1.73,172.5),(15,2,2,5000,'4300 Martin Luther King Blvd','2025-02-16',10000,50000000),(16,2,3,5000,'4300 Martin Luther King Blvd','2025-02-16',10000,50000000),(17,2,4,5000,'4300 Martin Luther King Blvd','2025-02-16',10000,50000000),(18,2,5,5000,'4300 Martin Luther King Blvd','2025-02-16',10000,50000000);
 /*!40000 ALTER TABLE `FuelQuote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `UserCredentials` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `UserCredentials` (
 
 LOCK TABLES `UserCredentials` WRITE;
 /*!40000 ALTER TABLE `UserCredentials` DISABLE KEYS */;
-INSERT INTO `UserCredentials` VALUES (1,'avery','$2b$10$pCudhqMwHtFbymS0haCbxOg5UdaPG1dSB3f9FpRY7CpsUtitzLbaq'),(2,'johnny','$2b$10$XRf7hmGU4kINzc.uQTYyf.dd/lRwlhwlxvQjI3YPMzuqhSpMkgjFa'),(3,'fueltrackerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr','$2b$10$vVqi9eyUQXC1FlxCbI4P2ewCvAUM4qyQfMY3IIxJEg3zcH1ZjbAIe'),(4,'fueltracker','$2b$10$4p5IONiv2ni0Fe6y340/P.3ZXG6TUuw55AT6YN2ChaLZmpcyPwAhO'),(5,'fuelracker','$2b$10$ayvob08fIE1xDl8Kq.F/JuexFuBfOg/dK7fw20kUpclfOjARRJ1oG'),(6,'fultrackerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr','$2b$10$lbIRQMQfIsLXcNOhuDbAa.1ZeTDHI0.QJJQZPIUsFDLjUiDsz5B7e'),(7,'fuetracker','$2b$10$zYRh4QZBHU..FWDFNY10..SGBOLnaPCXYDjQGK2G5IehR5zJaNxnS'),(8,'fuelacker','$2b$10$403fzFYe.iG0s/sFOE3h7eoO0WEHpsr3r4cpaMMnU.fFyT4TQkgmq'),(9,'fueacker','$2b$10$SoeZJkvHx6pd.YoO01Ng7.g6ojX7d0RxoJwVay2euYHeRKomis/9y'),(10,'fultrckerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr','$2b$10$8hkwMD90jZ3k4Ll2B.Dm6eFdAc.Sde3skMxSCSe4yHCcd7E52Y98u'),(11,'fuetcker','$2b$10$cBfSJH0W4W86wOegS/fhWe3Z7wJtuVnVlZm3gRUQLfzwmFEd4h1R.'),(12,'test1','$2b$10$upKXSQoezjWL8eufC4DbJ.vb6J4RGhnqvza.QsQ1I5pgNuwKe70s2');
+INSERT INTO `UserCredentials` VALUES (1,'avery','$2b$10$pCudhqMwHtFbymS0haCbxOg5UdaPG1dSB3f9FpRY7CpsUtitzLbaq'),(2,'johnny','$2b$10$XRf7hmGU4kINzc.uQTYyf.dd/lRwlhwlxvQjI3YPMzuqhSpMkgjFa'),(12,'test1','$2b$10$upKXSQoezjWL8eufC4DbJ.vb6J4RGhnqvza.QsQ1I5pgNuwKe70s2'),(13,'rodney','$2b$10$qtoL1fbfz3ZFyvt2duH6cuu70l.ljyICaU3ngfMCx3JthhoQeq6vS'),(14,'rodneyyyy','$2b$10$UpujlDUcUx8kQArT7YJjkeoqIV9eW1YE3suppK9k4R1niI8bV8Cv6'),(15,'avery2','$2b$10$nMORcfZQRBp/ZPjgSDBxlurpbUoA6Dy/DA4jXQw16WjeUYSXMws4m'),(16,'bobby','$2b$10$ty7OhvWxfuUlNVl6t/fvG.Ev0yOurAbQdeAE/m.UQKBFntCYQmXl2'),(17,'erffere','$2b$10$jH2CL7RL7vPbyokpNYGR7uHk6LYl9JhVj10CvXWOyu1ln./9YqOfa'),(18,'username','$2b$10$aRrVyEFVzButsEcoAwa.mur3O3bB.xmoXKs0T.Y0p8.fRk.B36Zze'),(19,'richard','$2b$10$08.v/3G7iYhYbCPzWx1uRuxv3cR9agzl9QFS4Bhkxs5eTsIDVqWO2'),(21,'papajh','$2b$10$loPwX4w6nx.LXsYJDrFAB.4yjokEffoPa2/TW4g5610LT6gED72gK'),(24,'joebogey','$2b$10$3A04mptfN3669LrYrI1o4ufb4SoDTHarxu.IOoqbN1o/g3MJAM9Um'),(25,'z6pbhpc0','$2b$10$APaIAP82ZHrgoGY6SX1NGegwXbvIuT2L2CsGfBLFZQT1jYxE2upFK'),(26,'w99d6g66','$2b$10$.rB9am71xIzkHipohdXBCeW5GpIttn12Nh4koLppccq0f0mecL6Cy'),(27,'uckacf03','$2b$10$7Bim.6Qbb8dURTSFsFoE7eGKZf98F9SmxoV35jhq.hKXmuVdqwj.q'),(28,'4x3izqgh','$2b$10$AT59FXPk9gzYq9ulyEW4juHDN6Ziv9LbInvi9DxrBRHEzfz9GmkUW'),(29,'u7uurxcf','$2b$10$D6NNsTId/QwdTaKQHymkre/gpmc5ZUTaCVk8iyQOYga5gjelL91Yq'),(30,'s6hkkihx','$2b$10$j.Bw3ohpNFSbhs98JnsSg.Yz.ZcyeQiLZIUN0KKHnGKWmFX5QUXnG'),(31,'uhx1x8nx','$2b$10$/RjpeAOxuSopXAXPESj..uabJcfqp.gowZ3LJqronmIrCr6r5X2he'),(32,'zcd177wc','$2b$10$9y0FUuINZJTUO1cyQasdIuC4Gw7zJjU4mw2mV6sxnneU9mL5zUQuq'),(33,'8orj6h4b','$2b$10$f1StdFRMm5rPjLXjzgxUK.lrxDJlCD6/Y/ufSODMCy.dwQ02tmwxa'),(34,'2a9x4tvu','$2b$10$pn8.KV/TRWzhRIu1u5b3lux1jM9LjRc9bmySGL2HXxlhSQd6jpBp.'),(35,'cjfa6jqo','$2b$10$kBv2aywGqkO.TvMsEMRFtuo6GSeljYCqmHYSLD/5HtvXrRbYDsFGC');
 /*!40000 ALTER TABLE `UserCredentials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,4 +133,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-26 16:40:13
+-- Dump completed on 2024-04-11 14:22:25
