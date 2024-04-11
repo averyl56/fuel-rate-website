@@ -4,9 +4,9 @@ import { endpointConnection,ENDPOINTS } from '../api/index.js';
 import '../css/QuoteHistoryPage.css'; // Import CSS file for styling
 
 const sampleQuotes = [
-    { number: 1, gallonsRequested: 100, totalPrice: 2000, deliveryDate: '2024-02-16', suggestedPrice: 20, address: "" },
-    { number: 2, gallonsRequested: 150, totalPrice: 3000, deliveryDate: '2024-02-15', suggestedPrice: 20, address: "" },
-    { number: 3, gallonsRequested: 200, totalPrice: 4000, deliveryDate: '2024-02-14', suggestedPrice: 20, address: "" },
+    { number: 1, gallonsRequested: 100, totalPrice: 2000, deliveryDate: '2024-02-16', suggestedPrice: 20, address: "123 Main Street" },
+    { number: 2, gallonsRequested: 150, totalPrice: 3000, deliveryDate: '2024-02-15', suggestedPrice: 20, address: "456 Cosc Avenue" },
+    { number: 3, gallonsRequested: 200, totalPrice: 4000, deliveryDate: '2024-02-14', suggestedPrice: 20, address: "789 Oak Lane" },
 ];
 
 // Page that shows a user's fuel quote history once they logged in
