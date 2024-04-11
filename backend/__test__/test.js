@@ -41,6 +41,26 @@ describe('Login Route', () => {
     expect(response.status).toBe(500);
   });
 
+  it('should return an error for a blank username', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({
+        username: '',
+        password: 'testpass'
+      });
+    expect(response.status).toBe(500);
+  });
+
+  it('should return an error for a blank password', async () => {
+    const response = await request(app)
+      .post('/login')
+      .send({
+        username: 'testuser',
+        password: ''
+      });
+    expect(response.status).toBe(500);
+  });
+
   it('should return an error for an incorrect password', async () => {
     const response = await request(app)
       .post('/login')
@@ -181,6 +201,21 @@ describe('Profile Route', () => {
     expect(response.status).toBe(500);
   });
 
+  it('should return an error for a invalid city', async () => {
+    const response = await request(app)
+    .post('/profile')
+    .send({
+      userId: 16,
+      name: 'Archibald Humphrey',
+      address1: '4300 Martin Luther King Blvd',
+      address2: '', 
+      city: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+      state: 'TX',
+      zipcode: '77204'
+    });
+    expect(response.status).toBe(500);
+  });
+
   it('should return an error for a blank state', async () => {
     const response = await request(app)
     .post('/profile')
@@ -192,6 +227,36 @@ describe('Profile Route', () => {
       city: 'Houston',
       state: '',
       zipcode: '77204'
+    });
+    expect(response.status).toBe(500);
+  });
+
+  it('should return an error for a invalid state', async () => {
+    const response = await request(app)
+    .post('/profile')
+    .send({
+      userId: 16,
+      name: 'Archibald Humphrey',
+      address1: '4300 Martin Luther King Blvd',
+      address2: '', 
+      city: 'Houston',
+      state: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+      zipcode: '77204'
+    });
+    expect(response.status).toBe(500);
+  });
+
+  it('should return an error for a blank zipcode', async () => {
+    const response = await request(app)
+    .post('/profile')
+    .send({
+      userId: 16,
+      name: 'Archibald Humphrey',
+      address1: '4300 Martin Luther King Blvd',
+      address2: '', 
+      city: 'Houston',
+      state: 'TX',
+      zipcode: ''
     });
     expect(response.status).toBe(500);
   });
@@ -210,6 +275,7 @@ describe('Profile Route', () => {
     });
     expect(response.status).toBe(500);
   });
+
   it('should return an error for an invalid zipcode w/ letters', async () => {
     const response = await request(app)
     .post('/profile')
