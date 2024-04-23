@@ -51,11 +51,9 @@ function BottomFooter() {
         <footer id='bottomfooter'>
             <pre id='footertext' >
             <span id='footerlogo'>Contact Us</span><br />
-                1800-COSC-4351<br />
-                info@fuel.com
+                1800-COSC-4351     info@fuel.com <br />
+                Avery Lindseth, Johnny Lu, Richard Lam, Rodney Hong
             </pre>
-            
-        
         </footer>
     );
 }
